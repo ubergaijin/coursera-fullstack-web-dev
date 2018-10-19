@@ -1,0 +1,24 @@
+{
+  "name": "git-test",
+  "version": "1.0.0",
+  "description": "Git and Node Test",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run lite",
+    "lite": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dossiman/coursera-fullstack-web-dev.git"
+  },
+  "author": "Cyril Clement",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dossiman/coursera-fullstack-web-dev/issues"
+  },
+  "homepage": "https://github.com/dossiman/coursera-fullstack-web-dev#readme",
+  "devDependencies": {
+    "lite-server": "^2.4.0"
+  }
+}
