@@ -45,6 +45,9 @@
             <div class="col-12 col-sm align-self-center">
                 <img src="img/logo.png" class="img-fluid">
             </div>
+            <div class="col-12 col-sm align-self-center">
+                <a class="btn btn-sm btn-warning btn-block" role="button" href="#reserve">Reserve Table</a>
+            </div>
         </div>
     </div>
 </header>
@@ -78,9 +81,17 @@
             <h3>This Month's Promotions</h3>
         </div>
         <div class="col col-sm col-md">
-            <h2>Weekend Grand Buffet</h2>
-            <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five
-                choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
+            <div class="media">
+                <div class="media-body">
+                    <h2 class="mt-0">Weekend Grand Buffet
+                        <span class="badge badge-danger">NEW</span>
+                    </h2>
+                    <p class="d-none d-sm-block">Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five
+                    choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person</p>
+                </div>
+                <img class="d-flex ml-3 img-thumbnail align-self-center"
+                        src="img/buffet.png" alt="Weekend Grand Buffet">
+            </div>
         </div>
     </div>
 
@@ -100,6 +111,61 @@
                         whos-who in the culinary world, he specializes in
                         creating mouthwatering Indo-Italian fusion experiences.
                     </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-content">
+        <div class="col-12 offset-sm-2 col-sm-8">
+            <div class="card" id="reserve">
+                <h3 class="card-header bg-warning text-white">Reserve a Table</h3>
+                <div class="card-body">
+                    <form>
+                        <div class="row form-group">
+                            <label class="col-form-label col-12 col-sm-2">Number of Guests</label>
+                            <div class="col-12 col-sm-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="nbguests" id="nbguests1" value="1">
+                                    <label class="form-check-label" for="nbguests1">1</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="nbguests" id="nbguests2" value="2">
+                                    <label class="form-check-label" for="nbguests2">2</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="nbguests" id="nbguests3" value="3">
+                                    <label class="form-check-label" for="nbguests3">3</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="nbguests" id="nbguests4" value="4">
+                                    <label class="form-check-label" for="nbguests4">4</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="nbguests" id="nbguests5" value="5">
+                                    <label class="form-check-label" for="nbguests5">5</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="nbguests" id="nbguests6" value="6">
+                                    <label class="form-check-label" for="nbguests6">6</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-form-label col-12 col-sm-2">Date and Time</label>
+                            <div class="col-12 col-sm-4">
+                                <input type="text" class="form-control" id="date" name="date" placeholder="Date">
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <input type="text" class="form-control" id="time" name="time" placeholder="Time">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="offset-sm-2 col-2">
+                                <button type="submit" class="btn btn-primary">Reserve</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
