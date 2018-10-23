@@ -31,6 +31,15 @@ body {
 .navbar-dark {
   background-color: #512DA8; }
 
+.modal-header {
+  background-color: #512DA8;
+  color: floralwhite; }
+  .modal-header button {
+    color: floralwhite; }
+
+.modal-body {
+  background-color: #D1C4E9; }
+
 .tab-content {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
