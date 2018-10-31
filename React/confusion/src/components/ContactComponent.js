@@ -22,23 +22,19 @@ class Contact extends Component {
         email: false
       }
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({[target.name]: value});
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     console.log("Current State is: " + JSON.stringify(this.state));
     alert("Current State is: " + JSON.stringify(this.state));
     event.preventDefault();
-  }
+  };
 
   handleBlur = field => evt => {
     this.setState({
