@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Container, Row, Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 const RenderDish = ({dish}) => (
-    <div className="col-12 col-md-5 m-1">
+    <Col md={5} className="m-1">
       <Card>
         <CardImg width="100%" src={dish.image} alt={dish.name}/>
         <CardBody>
@@ -12,14 +12,14 @@ const RenderDish = ({dish}) => (
           <CardText>{dish.description}</CardText>
         </CardBody>
       </Card>
-    </div>
+    </Col>
 );
 
 function RenderComments({comments}) {
   if (comments != null) {
     const dtf = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'});
 
-    const commentItems = comments.map(comment => (
+    const commentItems = comments.map(comment =>
         <li key={comment.id}>
           <p>{comment.comment}</p>
           <p>-- {comment.author}, {dtf.format(Date.parse(comment.date))}</p>
@@ -27,12 +27,12 @@ function RenderComments({comments}) {
     );
 
     return (
-        <div className="col-12 col-md-5 m-1">
+        <Col md={5} className="m-1">
           <h4>Comments</h4>
           <ul className="list-unstyled">
             {commentItems}
           </ul>
-        </div>
+        </Col>
     );
   } else {
     return <div/>;
@@ -42,22 +42,22 @@ function RenderComments({comments}) {
 function DishDetail(props) {
   if (props.dish != null) {
     return (
-        <div className="container">
-          <div className="row">
+        <Container>
+          <Row>
             <Breadcrumb>
               <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
               <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
             </Breadcrumb>
-            <div className="col-12">
+            <Col xs={12}>
               <h3>{props.dish.name}</h3>
               <hr/>
-            </div>
-          </div>
-          <div className="row">
+            </Col>
+          </Row>
+          <Row>
             <RenderDish dish={props.dish}/>
             <RenderComments comments={props.comments}/>
-          </div>
-        </div>
+          </Row>
+        </Container>
     );
   } else {
     return <div/>;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media} from 'reactstrap';
+import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media, Container, Col, Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 const RenderLeader = ({leader}) => (
@@ -23,19 +23,19 @@ function About(props) {
   );
 
   return (
-      <div className="container">
-        <div className="row">
+      <Container>
+        <Row>
           <Breadcrumb>
             <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
             <BreadcrumbItem active>About Us</BreadcrumbItem>
           </Breadcrumb>
-          <div className="col-12">
+          <Col xs={12}>
             <h3>About Us</h3>
             <hr/>
-          </div>
-        </div>
-        <div className="row row-content">
-          <div className="col-12 col-md-6">
+          </Col>
+        </Row>
+        <Row className="row-content">
+          <Col md={6}>
             <h2>Our History</h2>
             <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in
                Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys
@@ -43,8 +43,8 @@ function About(props) {
                the world, you never know what will arrive on your plate the next time you visit us.</p>
             <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our
                CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
-          </div>
-          <div className="col-12 col-md-5">
+          </Col>
+          <Col md={5}>
             <Card>
               <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
               <CardBody>
@@ -60,8 +60,8 @@ function About(props) {
                 </dl>
               </CardBody>
             </Card>
-          </div>
-          <div className="col-12">
+          </Col>
+          <Col>
             <Card>
               <CardBody className="bg-faded">
                 <blockquote className="blockquote">
@@ -74,19 +74,19 @@ function About(props) {
                 </blockquote>
               </CardBody>
             </Card>
-          </div>
-        </div>
-        <div className="row row-content">
-          <div className="col-12">
+          </Col>
+        </Row>
+        <Row className="row-content">
+          <Col xs={12}>
             <h2>Corporate Leadership</h2>
-          </div>
-          <div className="col-12">
+          </Col>
+          <Col>
             <Media list>
               {leaders}
             </Media>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
   );
 }
 

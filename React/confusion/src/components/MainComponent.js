@@ -45,7 +45,7 @@ class Main extends Component {
     };
 
     return (
-        <div>
+        <>
           <Header/>
           <Switch>
             <Route path="/home" component={HomePage}/>
@@ -56,7 +56,7 @@ class Main extends Component {
             <Redirect to="/home"/>
           </Switch>
           <Footer/>
-        </div>
+        </>
     );
   }
 }

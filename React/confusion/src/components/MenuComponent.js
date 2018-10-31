@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem, Container, Row, Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 const RenderMenuItem = ({dish}) => (
@@ -16,27 +16,27 @@ const RenderMenuItem = ({dish}) => (
 
 function Menu(props) {
     const menu = props.dishes.map(dish =>
-        <div key={dish.id} className="col-12 col-md-5 m-1">
+        <Col key={dish.id} md={5} className="m-1">
           <RenderMenuItem dish={dish}/>
-        </div>
+        </Col>
     );
 
     return (
-        <div className="container">
-          <div className="row">
+        <Container>
+          <Row>
             <Breadcrumb>
               <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
               <BreadcrumbItem active>Menu</BreadcrumbItem>
             </Breadcrumb>
-            <div className="col-12">
+            <Col xs={12}>
               <h3>Menu</h3>
               <hr/>
-            </div>
-          </div>
-          <div className="row">
+            </Col>
+          </Row>
+          <Row>
             {menu}
-          </div>
-        </div>
+          </Row>
+        </Container>
     );
 }
 export default Menu;
