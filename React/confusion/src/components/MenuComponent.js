@@ -3,7 +3,7 @@ import React from 'react';
 import {Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-const RenderMenuItem = ({dish, onClick}) => (
+const RenderMenuItem = ({dish}) => (
     <Card>
       <Link to={`/menu/${dish.id}`}>
         <CardImg width="100%" src={dish.image} alt={dish.name}/>
@@ -44,11 +44,9 @@ function Menu(props) {
 export default Menu;
 
 RenderMenuItem.propTypes = {
-  dish: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  dish: PropTypes.object.isRequired
 };
 
 Menu.propTypes = {
-  dishes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onClick: PropTypes.func
+  dishes: PropTypes.arrayOf(PropTypes.object).isRequired
 };

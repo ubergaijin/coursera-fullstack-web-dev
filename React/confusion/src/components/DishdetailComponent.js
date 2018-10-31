@@ -17,11 +17,13 @@ const RenderDish = ({dish}) => (
 
 function RenderComments({comments}) {
   if (comments != null) {
+    const dtf = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'});
+
     const commentItems = comments.map(comment => {
       return (
           <li key={comment.id}>
             <p>{comment.comment}</p>
-            <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+            <p>-- {comment.author}, {dtf.format(Date.parse(comment.date))}</p>
           </li>
       );
     });
