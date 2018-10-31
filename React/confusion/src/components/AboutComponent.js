@@ -4,21 +4,23 @@ import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media} from 'rea
 import {Link} from 'react-router-dom';
 
 const RenderLeader = ({leader}) => (
-    <Media key={leader.id} tag="li" className="mb-5">
+    <Media tag="li" className="mb-5">
       <Media left className="mr-5">
         <Media object src={leader.image} alt={leader.name}/>
       </Media>
       <Media body>
         <Media heading>{leader.name}</Media>
         <p>{leader.designation}</p>
-        {leader.description}
+        <p>{leader.description}</p>
       </Media>
     </Media>
 );
 
 function About(props) {
 
-  const leaders = props.leaders.map(leader => <RenderLeader leader={leader}/>);
+  const leaders = props.leaders.map(leader =>
+      <RenderLeader key={leader.id} leader={leader}/>
+  );
 
   return (
       <div className="container">

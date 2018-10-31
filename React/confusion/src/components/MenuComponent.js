@@ -15,13 +15,11 @@ const RenderMenuItem = ({dish}) => (
 );
 
 function Menu(props) {
-    const menu = props.dishes.map((dish) => {
-      return (
-          <div key={dish.id} className="col-12 col-md-5 m-1">
-            <RenderMenuItem dish={dish}/>
-          </div>
-      );
-    });
+    const menu = props.dishes.map(dish =>
+        <div key={dish.id} className="col-12 col-md-5 m-1">
+          <RenderMenuItem dish={dish}/>
+        </div>
+    );
 
     return (
         <div className="container">
