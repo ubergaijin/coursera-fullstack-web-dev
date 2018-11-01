@@ -15,18 +15,18 @@ function RenderCard({item}) {
   );
 }
 
-function Home(props) {
+function Home({dish, promotion, leader}) {
   return (
       <Container>
         <Row className="align-items-start">
           <Col md className="m-1">
-            <RenderCard item={props.dish}/>
+            <RenderCard item={dish}/>
           </Col>
           <Col md className="m-1">
-            <RenderCard item={props.promotion}/>
+            <RenderCard item={promotion}/>
           </Col>
           <Col md className="m-1">
-            <RenderCard item={props.leader}/>
+            <RenderCard item={leader}/>
           </Col>
         </Row>
       </Container>
@@ -42,5 +42,10 @@ Home.propTypes = {
 };
 
 RenderCard.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    designation: PropTypes.string,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired
 };

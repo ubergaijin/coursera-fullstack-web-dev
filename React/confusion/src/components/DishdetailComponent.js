@@ -39,23 +39,23 @@ function RenderComments({comments}) {
   }
 }
 
-function DishDetail(props) {
-  if (props.dish != null) {
+function DishDetail({dish, comments}) {
+  if (dish != null) {
     return (
         <Container>
           <Row>
             <Breadcrumb>
               <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-              <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+              <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
             </Breadcrumb>
             <Col xs={12}>
-              <h3>{props.dish.name}</h3>
+              <h3>{dish.name}</h3>
               <hr/>
             </Col>
           </Row>
           <Row>
-            <RenderDish dish={props.dish}/>
-            <RenderComments comments={props.comments}/>
+            <RenderDish dish={dish}/>
+            <RenderComments comments={comments}/>
           </Row>
         </Container>
     );
@@ -67,14 +67,25 @@ function DishDetail(props) {
 export default DishDetail;
 
 RenderDish.propTypes = {
-  dish: PropTypes.object.isRequired
+  dish: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired
 };
 
 RenderComments.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired
+  comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        comment: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired
+      })
+  ).isRequired
 };
 
 DishDetail.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.arrayOf().isRequired,
   dish: PropTypes.object.isRequired
 };

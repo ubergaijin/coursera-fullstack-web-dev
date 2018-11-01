@@ -92,6 +92,18 @@ function About(props) {
 
 export default About;
 
+RenderLeader.propTypes = {
+  leader: PropTypes.shape({
+    abbr: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    designation: PropTypes.string.isRequired,
+    featured: PropTypes.bool,
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired
+};
+
 About.propTypes = {
-  leaders: PropTypes.arrayOf(PropTypes.object).isRequired
+  leaders: PropTypes.arrayOf(RenderLeader.propTypes.leader).isRequired
 };

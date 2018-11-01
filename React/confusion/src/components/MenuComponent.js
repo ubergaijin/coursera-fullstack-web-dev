@@ -14,8 +14,8 @@ const RenderMenuItem = ({dish}) => (
     </Card>
 );
 
-function Menu(props) {
-    const menu = props.dishes.map(dish =>
+function Menu({dishes}) {
+    const menu = dishes.map(dish =>
         <Col key={dish.id} md={5} className="m-1">
           <RenderMenuItem dish={dish}/>
         </Col>
