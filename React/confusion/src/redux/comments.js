@@ -1,5 +1,6 @@
 import {COMMENTS} from '../shared/comments';
 import * as ActionTypes from './ActionTypes';
+import PropTypes from "prop-types";
 
 export const Comments = (state = COMMENTS, action) => {
   switch (action.type) {
@@ -13,3 +14,12 @@ export const Comments = (state = COMMENTS, action) => {
       return state;
   }
 };
+
+export const commentPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  dishId: PropTypes.number,
+  rating: PropTypes.number,
+  comment: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired
+});

@@ -4,6 +4,9 @@ import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem
   Container, Row, Col, Button, Label, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {LocalForm, Control, Errors} from 'react-redux-form';
+import {Loading} from './LoadingComponent';
+import {dishPropTypes} from "../redux/dishes";
+import {commentPropTypes} from "../redux/comments";
 
 const required = val => val && val.length > 0;
 const maxLength = len => val => !val || val.length <= len;
@@ -120,8 +123,24 @@ function RenderComments({comments, addComment, dishId}) {
   }
 }
 
-function DishDetail({dish, comments, addComment}) {
-  if (dish != null) {
+function DishDetail({dish, isLoading, errMess, comments, addComment}) {
+  if (isLoading) {
+    return (
+        <div className="container">
+          <div className="row">
+            <Loading/>
+          </div>
+        </div>
+    );
+  } else if (errMess) {
+    return (
+        <div className="container">
+          <div className="row">
+            <h4>{errMess}</h4>
+          </div>
+        </div>
+    );
+  } else if (dish != null) {
     return (
         <Container>
           <Row>
@@ -149,22 +168,6 @@ function DishDetail({dish, comments, addComment}) {
 
 export default DishDetail;
 
-const dishPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  description: PropTypes.string,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
-});
-
-const commentPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  dishId: PropTypes.number,
-  rating: PropTypes.number,
-  comment: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired
-});
-
 RenderDish.propTypes = {
   dish: dishPropTypes.isRequired
 };
@@ -178,7 +181,9 @@ RenderComments.propTypes = {
 DishDetail.propTypes = {
   addComment: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(commentPropTypes).isRequired,
-  dish: dishPropTypes.isRequired
+  dish: dishPropTypes,
+  errMess: PropTypes.string,
+  isLoading: PropTypes.bool
 };
 
 CommentForm.propTypes = {

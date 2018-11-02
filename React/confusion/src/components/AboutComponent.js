@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media, Container, Col, Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {leaderPropTypes} from "../redux/leaders";
 
 const RenderLeader = ({leader}) => (
     <Media tag="li" className="mb-5">
@@ -92,18 +93,10 @@ function About(props) {
 
 export default About;
 
-RenderLeader.propTypes = {
-  leader: PropTypes.shape({
-    abbr: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    designation: PropTypes.string.isRequired,
-    featured: PropTypes.bool,
-    id: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired
+About.propTypes = {
+  leaders: PropTypes.arrayOf(leaderPropTypes).isRequired
 };
 
-About.propTypes = {
-  leaders: PropTypes.arrayOf(RenderLeader.propTypes.leader).isRequired
+RenderLeader.propTypes = {
+  leader: leaderPropTypes.isRequired
 };

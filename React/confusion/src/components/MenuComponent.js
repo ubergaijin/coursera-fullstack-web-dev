@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem, Container, Row, Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {Loading} from "./LoadingComponent";
+import {dishPropTypes, dishesPropTypes} from "../redux/dishes";
 
 const RenderMenuItem = ({dish}) => (
     <Card>
@@ -14,13 +15,30 @@ const RenderMenuItem = ({dish}) => (
     </Card>
 );
 
-function Menu({dishes}) {
-    const menu = dishes.map(dish =>
-        <Col key={dish.id} md={5} className="m-1">
-          <RenderMenuItem dish={dish}/>
-        </Col>
-    );
+function Menu({dishes: {isLoading, errMess, dishes}}) {
+  const menu = dishes.map(dish =>
+      <Col key={dish.id} md={5} className="m-1">
+        <RenderMenuItem dish={dish}/>
+      </Col>
+  );
 
+  if (isLoading) {
+    return (
+        <div className="container">
+          <div className="row">
+            <Loading/>
+          </div>
+        </div>
+    );
+  } else if (errMess) {
+    return (
+        <div className="container">
+          <div className="row">
+            <h4>{errMess}</h4>
+          </div>
+        </div>
+    );
+  } else {
     return (
         <Container>
           <Row>
@@ -38,13 +56,15 @@ function Menu({dishes}) {
           </Row>
         </Container>
     );
+  }
 }
+
 export default Menu;
 
 RenderMenuItem.propTypes = {
-  dish: PropTypes.object.isRequired
+  dish: dishPropTypes.isRequired
 };
 
 Menu.propTypes = {
-  dishes: PropTypes.arrayOf(PropTypes.object).isRequired
+  dishes: dishesPropTypes.isRequired
 };
