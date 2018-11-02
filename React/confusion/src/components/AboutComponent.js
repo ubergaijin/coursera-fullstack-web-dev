@@ -17,10 +17,12 @@ const RenderLeader = ({leader}) => (
     </Media>
 );
 
-function About(props) {
+function About({leaders}) {
 
-  const leaders = props.leaders.map(leader =>
-      <RenderLeader key={leader.id} leader={leader}/>
+  const leaderItems = leaders.map(
+      (leader) => (
+          <RenderLeader key={leader.id} leader={leader}/>
+      )
   );
 
   return (
@@ -83,7 +85,7 @@ function About(props) {
           </Col>
           <Col>
             <Media list>
-              {leaders}
+              {leaderItems}
             </Media>
           </Col>
         </Row>

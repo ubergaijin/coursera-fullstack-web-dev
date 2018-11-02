@@ -16,10 +16,12 @@ const RenderMenuItem = ({dish}) => (
 );
 
 function Menu({dishes: {isLoading, errMess, dishes}}) {
-  const menu = dishes.map(dish =>
-      <Col key={dish.id} md={5} className="m-1">
-        <RenderMenuItem dish={dish}/>
-      </Col>
+  const menu = dishes.map(
+      (dish) => (
+          <Col key={dish.id} md={5} className="m-1">
+            <RenderMenuItem dish={dish}/>
+          </Col>
+      )
   );
 
   if (isLoading) {

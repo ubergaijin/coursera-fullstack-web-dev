@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Row, Col} from 'reactstrap';
 
-function Footer(props) {
+function Footer() {
   return (
       <div className="footer">
         <Container>
