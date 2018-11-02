@@ -5,6 +5,7 @@ import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem
 import {Link} from 'react-router-dom';
 import {LocalForm, Control, Errors} from 'react-redux-form';
 
+const required = val => val && val.length > 0;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
 
@@ -18,12 +19,14 @@ class CommentForm extends React.Component {
     };
   }
 
-  toggle = () => this.setState({modal: !this.state.modal});
+  toggle = () => {
+    this.setState({modal: !this.state.modal});
+  };
 
-  handleSubmit(values) {
-    console.log('Current State is: ' + JSON.stringify(values));
-    alert('Current State is: ' + JSON.stringify(values));
-  }
+  handleSubmit = ({rating, author, comment}) => {
+    this.toggle();
+    this.props.addComment(this.props.dishId, Number(rating), author, comment);
+  };
 
   render() {
     return (
@@ -39,7 +42,8 @@ class CommentForm extends React.Component {
                 <LocalForm onSubmit={this.handleSubmit}>
                   <Row className="form-group">
                     <Label htmlFor="rating">Rating</Label>
-                    <Control.select model=".rating" id="rating" className="form-control">
+                    <Control.select model=".rating" id="rating" className="form-control"
+                                    defaultValue="1">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -62,7 +66,10 @@ class CommentForm extends React.Component {
                   </Row>
                   <Row className="form-group">
                     <Label htmlFor="comment">Comment</Label>
-                    <Control.textarea model=".comment" id="comment" rows="5" className="form-control"/>
+                    <Control.textarea model=".comment" id="comment" className="form-control"
+                    rows="5" validators={{required}}/>
+                    <Errors className="text-danger" model=".comment" show="touched"
+                            messages={{required: 'Required'}}/>
                   </Row>
                   <Row className="form-group">
                     <Button color="primary" type="submit">Submit</Button>
@@ -88,7 +95,7 @@ const RenderDish = ({dish}) => (
     </Col>
 );
 
-function RenderComments({comments}) {
+function RenderComments({comments, addComment, dishId}) {
   if (comments != null) {
     const dtf = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'});
 
@@ -105,7 +112,7 @@ function RenderComments({comments}) {
           <ul className="list-unstyled">
             {commentItems}
           </ul>
-          <CommentForm/>
+          <CommentForm dishId={dishId} addComment={addComment}/>
         </Col>
     );
   } else {
@@ -113,7 +120,7 @@ function RenderComments({comments}) {
   }
 }
 
-function DishDetail({dish, comments}) {
+function DishDetail({dish, comments, addComment}) {
   if (dish != null) {
     return (
         <Container>
@@ -129,7 +136,9 @@ function DishDetail({dish, comments}) {
           </Row>
           <Row>
             <RenderDish dish={dish}/>
-            <RenderComments comments={comments}/>
+            <RenderComments comments={comments}
+                            addComment={addComment}
+                            dishId={dish.id}/>
           </Row>
         </Container>
     );
@@ -140,26 +149,39 @@ function DishDetail({dish, comments}) {
 
 export default DishDetail;
 
+const dishPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  description: PropTypes.string,
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+});
+
+const commentPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  dishId: PropTypes.number,
+  rating: PropTypes.number,
+  comment: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired
+});
+
 RenderDish.propTypes = {
-  dish: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired
+  dish: dishPropTypes.isRequired
 };
 
 RenderComments.propTypes = {
-  comments: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        comment: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired
-      })
-  ).isRequired
+  addComment: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(commentPropTypes).isRequired,
+  dishId: PropTypes.number.isRequired
 };
 
 DishDetail.propTypes = {
-  comments: PropTypes.arrayOf().isRequired,
-  dish: PropTypes.object.isRequired
+  addComment: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(commentPropTypes).isRequired,
+  dish: dishPropTypes.isRequired
+};
+
+CommentForm.propTypes = {
+  addComment: PropTypes.func.isRequired,
+  dishId: PropTypes.number.isRequired
 };
