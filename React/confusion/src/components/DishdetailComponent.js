@@ -10,6 +10,7 @@ import {Loading} from './LoadingComponent';
 import {dishPropTypes} from "../redux/dishes";
 import {commentPropTypes} from "../redux/comments";
 import {baseUrl} from "../shared/baseUrl";
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 const required = val => val && val.length > 0;
 const maxLength = len => val => !val || val.length <= len;
@@ -92,13 +93,18 @@ class CommentForm extends React.Component {
 
 const RenderDish = ({dish}) => (
     <Col md={5} className="m-1">
-      <Card>
-        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name}/>
-        <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
-          <CardText>{dish.description}</CardText>
-        </CardBody>
-      </Card>
+      <FadeTransform in
+          transformProps={{
+            exitTransform: 'scale(0.5) translateY(-50%)'
+          }}>
+        <Card>
+          <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name}/>
+          <CardBody>
+            <CardTitle>{dish.name}</CardTitle>
+            <CardText>{dish.description}</CardText>
+          </CardBody>
+        </Card>
+      </FadeTransform>
     </Col>
 );
 
@@ -108,10 +114,12 @@ function RenderComments({comments, postComment, dishId}) {
 
     const commentItems = comments.map(
         (comment) => (
-            <li key={comment.id}>
-              <p>{comment.comment}</p>
-              <p>-- {comment.author}, {dtf.format(Date.parse(comment.date))}</p>
-            </li>
+            <Fade in>
+              <li key={comment.id}>
+                <p>{comment.comment}</p>
+                <p>-- {comment.author}, {dtf.format(Date.parse(comment.date))}</p>
+              </li>
+            </Fade>
         )
     );
 
@@ -119,7 +127,9 @@ function RenderComments({comments, postComment, dishId}) {
         <Col md={5} className="m-1">
           <h4>Comments</h4>
           <ul className="list-unstyled">
-            {commentItems}
+            <Stagger in>
+              {commentItems}
+            </Stagger>
           </ul>
           <CommentForm dishId={dishId} postComment={postComment}/>
         </Col>
