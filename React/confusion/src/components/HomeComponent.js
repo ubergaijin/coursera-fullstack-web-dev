@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Container, Row, Col} from 'reactstrap';
-import {Loading} from "./LoadingComponent"
+import {Loading} from "./LoadingComponent";
 import {dishPropTypes} from "../redux/dishes";
 import {leaderPropTypes} from "../redux/leaders";
 import {promotionPropTypes} from "../redux/promotions";
+import {baseUrl} from "../shared/baseUrl";
 
 function RenderCard({item, isLoading, errMess}) {
   if (isLoading) {
@@ -18,7 +19,7 @@ function RenderCard({item, isLoading, errMess}) {
   } else {
     return (
         <Card>
-          <CardImg src={item.image} alt={item.name}/>
+          <CardImg src={baseUrl + item.image} alt={item.name}/>
           <CardBody>
             <CardTitle>{item.name}</CardTitle>
             {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
@@ -29,7 +30,7 @@ function RenderCard({item, isLoading, errMess}) {
   }
 }
 
-function Home({dish, dishesLoading, dishesErrMess, promotion, leader}) {
+function Home({dish, dishesLoading, dishesErrMess, promotion, promosLoading, promosErrMess, leader}) {
   return (
       <Container>
         <Row className="align-items-start">
@@ -37,7 +38,7 @@ function Home({dish, dishesLoading, dishesErrMess, promotion, leader}) {
             <RenderCard item={dish} isLoading={dishesLoading} errMess={dishesErrMess}/>
           </Col>
           <Col md className="m-1">
-            <RenderCard item={promotion}/>
+            <RenderCard item={promotion} isLoading={promosLoading} errMess={promosErrMess}/>
           </Col>
           <Col md className="m-1">
             <RenderCard item={leader}/>
@@ -54,7 +55,9 @@ Home.propTypes = {
   dishesErrMess: PropTypes.string,
   dishesLoading: PropTypes.bool,
   leader: leaderPropTypes,
-  promotion: promotionPropTypes
+  promotion: promotionPropTypes,
+  promosErrMess: PropTypes.string,
+  promosLoading: PropTypes.bool
 };
 
 RenderCard.propTypes = {

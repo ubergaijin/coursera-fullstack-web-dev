@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem,
-  Container, Row, Col, Button, Label, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {
+  Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem,
+  Container, Row, Col, Button, Label, Modal, ModalHeader, ModalBody
+} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {LocalForm, Control, Errors} from 'react-redux-form';
 import {Loading} from './LoadingComponent';
 import {dishPropTypes} from "../redux/dishes";
 import {commentPropTypes} from "../redux/comments";
+import {baseUrl} from "../shared/baseUrl";
 
 const required = val => val && val.length > 0;
 const maxLength = len => val => !val || val.length <= len;
@@ -46,7 +49,7 @@ class CommentForm extends React.Component {
                   <Row className="form-group">
                     <Label htmlFor="rating">Rating</Label>
                     <Control.select model=".rating" id="rating" className="form-control"
-                                    defaultValue="1">
+                        defaultValue="1">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>
@@ -57,22 +60,23 @@ class CommentForm extends React.Component {
                   <Row className="form-group">
                     <Label htmlFor="author">Your Name</Label>
                     <Control.text model=".author" id="author"
-                                  placeholder="Your Name" className="form-control"
-                                  validators={{
-                                    minLength: minLength(3),
-                                    maxLength: maxLength(15)}}/>
+                        placeholder="Your Name" className="form-control"
+                        validators={{
+                          minLength: minLength(3),
+                          maxLength: maxLength(15)
+                        }}/>
                     <Errors className="text-danger" model=".author" show="touched"
-                            messages={{
-                              minLength: 'Must be greater than 2 characters',
-                              maxLength: 'Must be 15 characters or less'
-                            }}/>
+                        messages={{
+                          minLength: 'Must be greater than 2 characters',
+                          maxLength: 'Must be 15 characters or less'
+                        }}/>
                   </Row>
                   <Row className="form-group">
                     <Label htmlFor="comment">Comment</Label>
                     <Control.textarea model=".comment" id="comment" className="form-control"
-                                      rows="5" validators={{required}}/>
+                        rows="5" validators={{required}}/>
                     <Errors className="text-danger" model=".comment" show="touched"
-                            messages={{required: 'Required'}}/>
+                        messages={{required: 'Required'}}/>
                   </Row>
                   <Row className="form-group">
                     <Button color="primary" type="submit">Submit</Button>
@@ -89,7 +93,7 @@ class CommentForm extends React.Component {
 const RenderDish = ({dish}) => (
     <Col md={5} className="m-1">
       <Card>
-        <CardImg width="100%" src={dish.image} alt={dish.name}/>
+        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name}/>
         <CardBody>
           <CardTitle>{dish.name}</CardTitle>
           <CardText>{dish.description}</CardText>
@@ -125,7 +129,7 @@ function RenderComments({comments, addComment, dishId}) {
   }
 }
 
-function DishDetail({dish, isLoading, errMess, comments, addComment}) {
+function DishDetail({dish, isLoading, errMess, comments, commentsErrMess, addComment}) {
   if (isLoading) {
     return (
         <div className="container">
@@ -158,8 +162,8 @@ function DishDetail({dish, isLoading, errMess, comments, addComment}) {
           <Row>
             <RenderDish dish={dish}/>
             <RenderComments comments={comments}
-                            addComment={addComment}
-                            dishId={dish.id}/>
+                addComment={addComment}
+                dishId={dish.id}/>
           </Row>
         </Container>
     );
@@ -183,6 +187,7 @@ RenderComments.propTypes = {
 DishDetail.propTypes = {
   addComment: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(commentPropTypes).isRequired,
+  commentsErrMess: PropTypes.string,
   dish: dishPropTypes,
   errMess: PropTypes.string,
   isLoading: PropTypes.bool
