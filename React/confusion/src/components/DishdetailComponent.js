@@ -31,7 +31,7 @@ class CommentForm extends React.Component {
 
   handleSubmit = ({rating, author, comment}) => {
     this.toggle();
-    this.props.addComment(this.props.dishId, Number(rating), author, comment);
+    this.props.postComment(this.props.dishId, Number(rating), author, comment);
   };
 
   render() {
@@ -102,7 +102,7 @@ const RenderDish = ({dish}) => (
     </Col>
 );
 
-function RenderComments({comments, addComment, dishId}) {
+function RenderComments({comments, postComment, dishId}) {
   if (comments != null) {
     const dtf = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'});
 
@@ -121,7 +121,7 @@ function RenderComments({comments, addComment, dishId}) {
           <ul className="list-unstyled">
             {commentItems}
           </ul>
-          <CommentForm dishId={dishId} addComment={addComment}/>
+          <CommentForm dishId={dishId} postComment={postComment}/>
         </Col>
     );
   } else {
@@ -129,7 +129,7 @@ function RenderComments({comments, addComment, dishId}) {
   }
 }
 
-function DishDetail({dish, isLoading, errMess, comments, commentsErrMess, addComment}) {
+function DishDetail({dish, isLoading, errMess, comments, commentsErrMess, postComment}) {
   if (isLoading) {
     return (
         <div className="container">
@@ -162,7 +162,7 @@ function DishDetail({dish, isLoading, errMess, comments, commentsErrMess, addCom
           <Row>
             <RenderDish dish={dish}/>
             <RenderComments comments={comments}
-                addComment={addComment}
+                postComment={postComment}
                 dishId={dish.id}/>
           </Row>
         </Container>
@@ -179,13 +179,13 @@ RenderDish.propTypes = {
 };
 
 RenderComments.propTypes = {
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(commentPropTypes).isRequired,
   dishId: PropTypes.number.isRequired
 };
 
 DishDetail.propTypes = {
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(commentPropTypes).isRequired,
   commentsErrMess: PropTypes.string,
   dish: dishPropTypes,
@@ -194,6 +194,6 @@ DishDetail.propTypes = {
 };
 
 CommentForm.propTypes = {
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   dishId: PropTypes.number.isRequired
 };

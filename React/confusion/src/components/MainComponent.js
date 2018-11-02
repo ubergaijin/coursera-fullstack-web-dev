@@ -9,7 +9,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {addComment, fetchComments, fetchDishes, fetchPromos} from '../redux/ActionCreators';
+import {postComment, fetchComments, fetchDishes, fetchPromos} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import {commentsPropTypes} from "../redux/comments";
 import {dishesPropTypes} from "../redux/dishes";
@@ -24,8 +24,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) => {
-    dispatch(addComment(dishId, rating, author, comment));
+  postComment: (dishId, rating, author, comment) => {
+    dispatch(postComment(dishId, rating, author, comment));
   },
   fetchDishes: () => {
     dispatch(fetchDishes());
@@ -71,7 +71,7 @@ class Main extends Component {
               errMess={this.props.dishes.errMess}
               comments={this.props.comments.comments.filter(comment => comment.dishId === dishId)}
               commentsErrMess={this.props.comments.errMess}
-              addComment={this.props.addComment}
+              postComment={this.props.postComment}
           />
       );
     };
@@ -97,7 +97,7 @@ class Main extends Component {
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
 
 Main.propTypes = {
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   fetchDishes: PropTypes.func.isRequired,
   fetchComments: PropTypes.func.isRequired,
   fetchPromos: PropTypes.func.isRequired,
