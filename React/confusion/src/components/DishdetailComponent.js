@@ -114,8 +114,8 @@ function RenderComments({comments, postComment, dishId}) {
 
     const commentItems = comments.map(
         (comment) => (
-            <Fade in>
-              <li key={comment.id}>
+            <Fade in key={comment.id}>
+              <li>
                 <p>{comment.comment}</p>
                 <p>-- {comment.author}, {dtf.format(Date.parse(comment.date))}</p>
               </li>

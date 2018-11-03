@@ -11,7 +11,7 @@ import {FadeTransform} from 'react-animation-components';
 function RenderCard({item, isLoading, errMess}) {
   if (isLoading) {
     return (
-        <Loading/>
+        <Loading />
     );
   } else if (errMess) {
     return (
@@ -24,7 +24,7 @@ function RenderCard({item, isLoading, errMess}) {
               exitTransform: 'scale(0.5) translateY(-50%)'
             }}>
           <Card>
-            <CardImg src={baseUrl + item.image} alt={item.name}/>
+            <CardImg src={baseUrl + item.image} alt={item.name} />
             <CardBody>
               <CardTitle>{item.name}</CardTitle>
               {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
@@ -36,18 +36,18 @@ function RenderCard({item, isLoading, errMess}) {
   }
 }
 
-function Home({dish, dishesLoading, dishesErrMess, promotion, promosLoading, promosErrMess, leader}) {
+function Home({dish, dishesLoading, dishesErrMess, promotion, promosLoading, promosErrMess, leader, leadersLoading, leadersErrMess}) {
   return (
       <Container>
         <Row className="align-items-start">
           <Col md className="m-1">
-            <RenderCard item={dish} isLoading={dishesLoading} errMess={dishesErrMess}/>
+            <RenderCard item={dish} isLoading={dishesLoading} errMess={dishesErrMess} />
           </Col>
           <Col md className="m-1">
-            <RenderCard item={promotion} isLoading={promosLoading} errMess={promosErrMess}/>
+            <RenderCard item={promotion} isLoading={promosLoading} errMess={promosErrMess} />
           </Col>
           <Col md className="m-1">
-            <RenderCard item={leader}/>
+            <RenderCard item={leader} isLoading={leadersLoading} errMess={leadersErrMess} />
           </Col>
         </Row>
       </Container>

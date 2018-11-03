@@ -9,12 +9,12 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {postComment, fetchComments, fetchDishes, fetchPromos} from '../redux/ActionCreators';
+import {postComment, fetchComments, fetchDishes, fetchPromos, fetchLeaders, postFeedback} from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import {commentsPropTypes} from "../redux/comments";
 import {dishesPropTypes} from "../redux/dishes";
-import {leaderPropTypes} from "../redux/leaders";
-import {promotionPropTypes} from "../redux/promotions";
+import {leadersPropTypes} from "../redux/leaders";
+import {promotionsPropTypes} from "../redux/promotions";
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 const mapStateToProps = (state) => ({
@@ -39,6 +39,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchPromos: () => {
     dispatch(fetchPromos());
+  },
+  fetchLeaders: () => {
+    dispatch(fetchLeaders());
+  },
+  postFeedback: (feedback) => {
+    dispatch(postFeedback(feedback));
   }
 });
 
@@ -48,6 +54,7 @@ class Main extends Component {
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();
+    this.props.fetchLeaders();
   }
 
   render() {
@@ -59,7 +66,9 @@ class Main extends Component {
               promotion={this.props.promotions.promotions.filter(p => p.featured)[0]}
               promosLoading={this.props.promotions.isLoading}
               promosErrMess={this.props.promotions.errMess}
-              leader={this.props.leaders.filter(l => l.featured)[0]}
+              leader={this.props.leaders.leaders.filter(l => l.featured)[0]}
+              leadersLoading={this.props.leaders.isLoading}
+              leadersErrMess={this.props.leaders.errMess}
           />
       );
     };
@@ -79,21 +88,24 @@ class Main extends Component {
 
     return (
         <>
-          <Header/>
+          <Header />
           <TransitionGroup>
             <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
               <Switch>
-                <Route path="/home" component={HomePage}/>
-                <Route exact path="/aboutus" component={() => <About leaders={this.props.leaders}/>}/>
-                <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes}/>}/>
-                <Route path="/menu/:dishId" component={DishWithId}/>
-                <Route exact path="/contactus"
-                    component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm}/>}/>
-                <Redirect to="/home"/>
+                <Route path="/home" component={HomePage} />
+                <Route exact path="/aboutus" component={() =>
+                    <About leaders={this.props.leaders} />} />
+                <Route exact path="/menu" component={() =>
+                    <Menu dishes={this.props.dishes} />} />
+                <Route path="/menu/:dishId" component={DishWithId} />
+                <Route exact path="/contactus" component={() =>
+                    <Contact postFeedback={this.props.postFeedback}
+                        resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                <Redirect to="/home" />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
-          <Footer/>
+          <Footer />
         </>
     );
   }
@@ -106,9 +118,11 @@ Main.propTypes = {
   fetchDishes: PropTypes.func.isRequired,
   fetchComments: PropTypes.func.isRequired,
   fetchPromos: PropTypes.func.isRequired,
+  fetchLeaders: PropTypes.func.isRequired,
   resetFeedbackForm: PropTypes.func.isRequired,
+  postFeedback: PropTypes.func.isRequired,
   comments: commentsPropTypes.isRequired,
   dishes: dishesPropTypes.isRequired,
-  leaders: PropTypes.arrayOf(leaderPropTypes).isRequired,
-  promotions: promotionPropTypes.isRequired
+  leaders: leadersPropTypes.isRequired,
+  promotions: promotionsPropTypes.isRequired
 };

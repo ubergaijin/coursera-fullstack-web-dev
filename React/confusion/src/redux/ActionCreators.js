@@ -88,7 +88,7 @@ export const fetchPromos = () => (dispatch) => {
   return fetch(baseUrl + 'promotions')
       .then(checkFetchStatus)
       .then(response => response.json())
-      .then(promos => dispatch(addPromos(promos)))
+      .then(response => dispatch(addPromos(response)))
       .catch(error => dispatch(promosFailed(error.message)));
 };
 
@@ -105,3 +105,48 @@ export const addPromos = (promos) => ({
   type: ActionTypes.ADD_PROMOS,
   payload: promos
 });
+
+export const fetchLeaders = () => (dispatch) => {
+  dispatch(leadersLoading(true));
+
+  return fetch(baseUrl + 'leaders')
+      .then(checkFetchStatus)
+      .then(response => response.json())
+      .then(response => dispatch(addLeaders(response)))
+      .catch(error => dispatch(leadersFailed(error.message)));
+};
+
+export const leadersLoading = () => ({
+  type: ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (errmess) => ({
+  type: ActionTypes.LEADERS_FAILED,
+  payload: errmess
+});
+
+export const addLeaders = (leaders) => ({
+  type: ActionTypes.ADD_LEADERS,
+  payload: leaders
+});
+
+export const postFeedback = (feedback) => () => {
+  return fetch(baseUrl + 'feedback',
+      {
+        method: 'POST',
+        body: JSON.stringify(feedback),
+        headers: {
+          'Content-type': 'application/json'
+        },
+        credentials: 'same-origin'
+      })
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        alert(JSON.stringify(response));
+      })
+      .catch(error => {
+        console.log('Post feedback ', error.message);
+        alert('Your feedback could not be posted\nError: ' + error.message);
+      });
+};

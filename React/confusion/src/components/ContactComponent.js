@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, {Component} from 'react';
 import {Breadcrumb, BreadcrumbItem, Button, ButtonGroup, Label, Container, Row, Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
@@ -12,8 +13,8 @@ const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z][A-Z]+$/i.test(val)
 class Contact extends Component {
 
   handleSubmit = (values) => {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    console.log("postFeedback: " + JSON.stringify(values));
+    this.props.postFeedback(values);
     this.props.resetFeedbackForm();
   };
 
@@ -174,3 +175,8 @@ class Contact extends Component {
 }
 
 export default Contact;
+
+Contact.propTypes = {
+  postFeedback: PropTypes.func.isRequired,
+  resetFeedbackForm: PropTypes.func.isRequired
+};
