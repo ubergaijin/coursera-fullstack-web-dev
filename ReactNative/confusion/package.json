@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "expo": "^31.0.2",
+    "global": "^4.3.2",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-elements": "^1.0.0-beta7",
-    "react-navigation": "^2.18.2"
+    "react-navigation": "^2.18.2",
+    "react-native": "latest"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "flow-bin": "^0.85.0"
   }
 }
