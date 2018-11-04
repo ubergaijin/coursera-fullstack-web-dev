@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="520244e7-793e-47ed-969d-ca1668ad378c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/DishdetailComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/MainComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/MenuComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/alberto.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/buffet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/elaicheesecake.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/uthappizza.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/vadonut.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/images/zucchipakoda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/dishes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/HomeComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MainComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/MainComponent.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,7 +27,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="js" value="6" />
+          <entry key="js" value="7" />
           <entry key="json" value="2" />
           <entry key="png" value="1" />
         </counts>
@@ -48,25 +36,27 @@
         <counts>
           <entry key="Image" value="1" />
           <entry key="JSON" value="2" />
-          <entry key="JavaScript" value="6" />
+          <entry key="JavaScript" value="7" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="2595" />
+          <entry key="js" value="3062" />
+          <entry key="txt" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="2595" />
+          <entry key="JavaScript" value="3062" />
+          <entry key="PLAIN_TEXT" value="24" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/MenuComponent.js">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -80,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/DishdetailComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+            <state relative-caret-position="262">
+              <caret line="16" column="3" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -89,11 +79,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/MainComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="697">
+              <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/HomeComponent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -124,6 +126,7 @@
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/components/DishdetailComponent.js" />
         <option value="$PROJECT_DIR$/components/MenuComponent.js" />
+        <option value="$PROJECT_DIR$/components/HomeComponent.js" />
         <option value="$PROJECT_DIR$/components/MainComponent.js" />
       </list>
     </option>
@@ -227,7 +230,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -286,18 +289,26 @@
       <option name="presentableId" value="Default" />
       <updated>1541244068893</updated>
     </task>
+    <task id="LOCAL-00001" summary="react navigation part 1">
+      <created>1541327162172</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1541327162172</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1137" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="npm" sideWeight="0.5312102" side_tool="true" weight="0.23652968" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46878982" visible="true" weight="0.23652968" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.5312102" side_tool="true" visible="true" weight="0.23652968" />
-      <window_info id="Project Explorer" order="2" />
-      <window_info id="Job Explorer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="npm" order="0" sideWeight="0.5312102" side_tool="true" weight="0.23652968" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.46878982" visible="true" weight="0.23652968" />
+      <window_info active="true" id="Structure" order="2" sideWeight="0.5312102" side_tool="true" visible="true" weight="0.23652968" />
+      <window_info id="Project Explorer" order="3" />
+      <window_info id="Job Explorer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49913645" weight="0.48025477" />
@@ -325,6 +336,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="react navigation part 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="react navigation part 1" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.expo/settings.json">
@@ -356,9 +371,17 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/MenuComponent.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/expo/build/Expo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="181">
+          <caret line="282" selection-start-line="282" selection-end-line="283" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/HomeComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -367,25 +390,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/DishdetailComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+        <state relative-caret-position="262">
+          <caret line="16" column="3" lean-forward="true" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/expo/build/Expo.js">
+    <entry file="file://$PROJECT_DIR$/components/MainComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="282" selection-start-line="282" selection-end-line="283" selection-end-column="38" />
+        <state relative-caret-position="697">
+          <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/MainComponent.js">
+    <entry file="file://$PROJECT_DIR$/components/MenuComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state>
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
