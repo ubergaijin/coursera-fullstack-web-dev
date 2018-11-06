@@ -7,6 +7,7 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Dishdetail from './DishdetailComponent';
+import Reservation from './ReservationComponent';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
@@ -15,6 +16,18 @@ const mapDispatchToProps = (dispatch) => ({
   fetchComments: () => dispatch(fetchComments()),
   fetchPromos: () => dispatch(fetchPromos()),
   fetchLeaders: () => dispatch(fetchLeaders())
+});
+
+const stackNavigationOptions = ({ navigation }) => ({
+  headerStyle: {
+    backgroundColor: '#512DA8'
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    color: '#fff'
+  },
+  headerLeft: <Icon name='menu' size={24} color='white'
+      onPress={() => navigation.toggleDrawer()} />
 });
 
 const MenuNavigator = createStackNavigator({
@@ -44,49 +57,25 @@ const MenuNavigator = createStackNavigator({
 const HomeNavigator = createStackNavigator({
   Home: { screen: Home }
 }, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-      backgroundColor: '#512DA8'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      color: '#fff'
-    },
-    headerLeft: <Icon name='menu' size={24} color='white'
-        onPress={() => navigation.toggleDrawer()} />
-  })
+  navigationOptions: stackNavigationOptions
 });
 
 const ContactNavigator = createStackNavigator({
   Contact: { screen: Contact }
 }, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-      backgroundColor: '#512DA8'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      color: '#fff'
-    },
-    headerLeft: <Icon name='menu' size={24} color='white'
-        onPress={() => navigation.toggleDrawer()} />
-  })
+  navigationOptions: stackNavigationOptions
+});
+
+const ReservationNavigator = createStackNavigator({
+  Reservation: { screen: Reservation }
+}, {
+  navigationOptions: stackNavigationOptions
 });
 
 const AboutNavigator = createStackNavigator({
   About: { screen: About }
 }, {
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: {
-      backgroundColor: '#512DA8'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      color: '#fff'
-    },
-    headerLeft: <Icon name='menu' size={24} color='white'
-        onPress={() => navigation.toggleDrawer()} />
-  })
+  navigationOptions: stackNavigationOptions
 });
 
 const CustomDrawerContentComponent = (props) => (
@@ -145,6 +134,16 @@ const MainNavigator = createDrawerNavigator({
       drawerLabel: 'About Us',
       drawerIcon: ({ tintColor }) => (
           <Icon name='info-circle' type='font-awesome' size={24} color={tintColor} />
+      )
+    }
+  },
+  Reservation: {
+    screen: ReservationNavigator,
+    navigationOptions: {
+      title: 'Reserve Table',
+      drawerLabel: 'Reserve Table',
+      drawerIcon: ({ tintColor }) => (
+          <Icon name='cutlery' type='font-awesome' size={24} color={tintColor} />
       )
     }
   }
