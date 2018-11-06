@@ -9,17 +9,18 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^31.0.2",
+    "expo": "^31.0.4",
     "global": "^4.3.2",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
-    "react-native": "latest",
+    "react-native": "0.57.1",
     "react-native-elements": "^1.0.0-beta7",
     "react-navigation": "^2.18.2",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "schedule": "0.4.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

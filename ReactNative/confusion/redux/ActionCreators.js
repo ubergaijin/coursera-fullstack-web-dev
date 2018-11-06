@@ -50,7 +50,7 @@ export const addDishes = (dishes) => ({
   payload: dishes
 });
 
-export const fetchPromotions = () => (dispatch) => {
+export const fetchPromos = () => (dispatch) => {
   dispatch(promosLoading());
   return fetch(baseUrl + 'promotions')
       .then(checkFetchStatus, error => { throw new Error(error.message); })
