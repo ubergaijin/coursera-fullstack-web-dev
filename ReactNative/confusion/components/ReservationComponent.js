@@ -42,12 +42,12 @@ class Reservation extends Component {
             <Picker style={styles.formItem}
                 selectedValue={this.state.guests}
                 onValueChange={val => this.setState({ guests: val })}>
-              <Picker.Item label='1' value='1' />
-              <Picker.Item label='2' value='2' />
-              <Picker.Item label='3' value='3' />
-              <Picker.Item label='4' value='4' />
-              <Picker.Item label='5' value='5' />
-              <Picker.Item label='6' value='6' />
+              <Picker.Item label='1' value={1} />
+              <Picker.Item label='2' value={2} />
+              <Picker.Item label='3' value={3} />
+              <Picker.Item label='4' value={4} />
+              <Picker.Item label='5' value={5} />
+              <Picker.Item label='6' value={6} />
             </Picker>
           </View>
           <View style={styles.formRow}>
@@ -86,15 +86,14 @@ class Reservation extends Component {
                 onPress={() => this.handleReservation()}
                 accessibilityLabel='Learn more about this purple button' />
           </View>
-          <Modal animationType='slide' transparent={false}
+          <Modal animationType='slide'
+              transparent={false}
               visible={this.state.showModal}
               onDismiss={() => {
-                this.toggleModal();
                 this.resetForm();
               }}
               onRequestClose={() => {
                 this.toggleModal();
-                this.resetForm();
               }}>
             <View style={styles.modal}>
               <Text style={styles.modalTitle}>Your Reservation</Text>
@@ -104,7 +103,6 @@ class Reservation extends Component {
               <Button color='#512da8' title='Close'
                   onPress={() => {
                     this.toggleModal();
-                    this.resetForm();
                   }} />
             </View>
           </Modal>
