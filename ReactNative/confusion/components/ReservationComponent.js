@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Picker, Switch, Button, Alert, Platform } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
-import { Permissions, Notifications } from 'expo';
+import { Permissions, Notifications, Calendar } from 'expo';
 
 class Reservation extends Component {
   static navigationOptions = {
@@ -34,6 +34,33 @@ class Reservation extends Component {
         channelId: 'reservation',
         color: '#512da8'
       }
+    });
+  }
+
+  static async obtainCalendarPermission() {
+    let permission = await Permissions.getAsync(Permissions.CALENDAR);
+    if (permission.status !== 'granted') {
+      permission = await Permissions.askAsync(Permissions.CALENDAR);
+      if (permission.status !== 'granted') {
+        Alert.alert('Permission not granted to access calendar');
+      }
+    }
+    return permission;
+  }
+
+  static async addReservationToCalendar(date) {
+    const startDate = new Date(Date.parse(date));
+    const endDate = new Date(Date.parse(date) + 2 * 60 * 60 * 1000);
+
+    await Reservation.obtainCalendarPermission();
+
+    // noinspection JSIgnoredPromiseFromCall
+    Calendar.createEventAsync(Calendar.DEFAULT, {
+      title: 'Con Fusion Table Reservation',
+      startDate: startDate,
+      endDate: endDate,
+      timeZone: 'Asia/Hong_Kong',
+      location: '121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong'
     });
   }
 
@@ -71,6 +98,8 @@ class Reservation extends Component {
             onPress: () => {
               // noinspection JSIgnoredPromiseFromCall
               Reservation.presentLocalNotification(this.state.date);
+              // noinspection JSIgnoredPromiseFromCall
+              Reservation.addReservationToCalendar(this.state.date);
               this.resetForm();
             }
           }
