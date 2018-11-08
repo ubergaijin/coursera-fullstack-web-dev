@@ -21,9 +21,9 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
 
   const handleViewRef = ref => this.view = ref;
 
-  const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
-    return (dx < -200);
-  };
+  const recognizeDrag = ({ dx }) => dx < -200;
+
+  const recognizeComment = ({ dx }) => dx > 200;
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (e, gestureState) => {
@@ -51,6 +51,8 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
             ],
             { cancelable: false }
         );
+      } else if (recognizeComment(gestureState)) {
+        onPressComment();
       }
     }
   });
