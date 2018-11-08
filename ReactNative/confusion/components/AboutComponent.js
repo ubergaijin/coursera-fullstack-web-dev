@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, Text, ScrollView } from 'react-native';
 import { Card, ListItem } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loader } from './LoadingComponent';
@@ -32,14 +33,16 @@ class About extends Component {
 
     return (
         <ScrollView>
-          <History />
-          <Card title='Corporate Leadership'>
-            <Loader isLoading={this.props.leaders.isLoading} errMess={this.props.leaders.errMess}>
-              <FlatList data={this.props.leaders.leaders}
-                  renderItem={renderLeaderItem}
-                  keyExtractor={item => item.id.toString()} />
-            </Loader>
-          </Card>
+          <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
+            <History />
+            <Card title='Corporate Leadership'>
+              <Loader isLoading={this.props.leaders.isLoading} errMess={this.props.leaders.errMess}>
+                <FlatList data={this.props.leaders.leaders}
+                    renderItem={renderLeaderItem}
+                    keyExtractor={item => item.id.toString()} />
+              </Loader>
+            </Card>
+          </Animatable.View>
         </ScrollView>
     );
   }

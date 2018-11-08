@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const Loading = () => (
+export const Loading = () => (
     <View style={styles.loadingView}>
       <ActivityIndicator size='large' color='#512da8' />
       <Text styles={styles.loadingText}>Loading...</Text>
@@ -36,5 +36,3 @@ export const Loader = ({ children, isLoading, errMess }) => {
     return children;
   }
 };
-
-export default Loading;
