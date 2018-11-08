@@ -9,6 +9,7 @@ import About from './AboutComponent';
 import Dishdetail from './DishdetailComponent';
 import Reservation from './ReservationComponent';
 import Favorites from './FavoriteComponent';
+import Login from './LoginComponent';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
@@ -81,6 +82,12 @@ const AboutNavigator = createStackNavigator({
   navigationOptions: mainNavigationOptions
 });
 
+const LoginNavigator = createStackNavigator({
+  Login: { screen: Login }
+}, {
+  navigationOptions: mainNavigationOptions
+});
+
 const FavoritesNavigator = createStackNavigator({
   Favorites: { screen: Favorites }
 }, {
@@ -106,9 +113,17 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 const MainNavigator = createDrawerNavigator({
+  Login: {
+    screen: LoginNavigator,
+    navigationOptions: createDrawerNavigationOptions({ title: 'Login', iconName: 'sign-in' })
+  },
   Home: {
     screen: HomeNavigator,
     navigationOptions: createDrawerNavigationOptions({ title: 'Home', iconName: 'home' })
+  },
+  About: {
+    screen: AboutNavigator,
+    navigationOptions: createDrawerNavigationOptions({ title: 'About Us', iconName: 'info-circle' })
   },
   Menu: {
     screen: MenuNavigator,
@@ -117,10 +132,6 @@ const MainNavigator = createDrawerNavigator({
   Contact: {
     screen: ContactNavigator,
     navigationOptions: createDrawerNavigationOptions({ title: 'Contact Us', iconName: 'address-card', iconSize: 22 })
-  },
-  About: {
-    screen: AboutNavigator,
-    navigationOptions: createDrawerNavigationOptions({ title: 'About Us', iconName: 'info-circle' })
   },
   Favorites: {
     screen: FavoritesNavigator,
@@ -131,6 +142,7 @@ const MainNavigator = createDrawerNavigator({
     navigationOptions: createDrawerNavigationOptions({ title: 'Reserve Table', iconName: 'cutlery' })
   }
 }, {
+  initialRouteName: 'Home',
   drawerBackgroundColor: '#D1C4E9',
   contentComponent: CustomDrawerContentComponent
 });
