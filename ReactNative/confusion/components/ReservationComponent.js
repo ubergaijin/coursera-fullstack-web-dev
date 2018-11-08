@@ -54,7 +54,8 @@ class Reservation extends Component {
             <Text style={styles.formLabel}>Smoking/Non-Smoking?</Text>
             <Switch style={styles.formItem}
                 value={this.state.smoking}
-                onTintColor='$512da8'
+                trackColor={{ true: '#512da8' }}
+                thumbColor='#512da8'
                 onValueChange={val => this.setState({ smoking: val })} />
           </View>
           <View style={styles.formRow}>

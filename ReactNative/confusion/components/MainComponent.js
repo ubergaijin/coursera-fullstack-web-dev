@@ -8,6 +8,7 @@ import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Dishdetail from './DishdetailComponent';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
@@ -18,64 +19,72 @@ const mapDispatchToProps = (dispatch) => ({
   fetchLeaders: () => dispatch(fetchLeaders())
 });
 
-const stackNavigationOptions = ({ navigation }) => ({
+const defaultNavigationOptions = ({
   headerStyle: {
     backgroundColor: '#512DA8'
   },
   headerTintColor: '#fff',
   headerTitleStyle: {
     color: '#fff'
-  },
+  }
+});
+
+const mainNavigationOptions = ({ navigation }) => ({
+  ...defaultNavigationOptions,
   headerLeft: <Icon name='menu' size={24} color='white'
       onPress={() => navigation.toggleDrawer()} />
 });
 
+const createDrawerNavigationOptions = ({ title, iconName, iconSize = 24 }) => ({
+  title: title,
+  drawerLabel: title,
+  drawerIcon: ({ tintColor }) => (
+      <Icon name={iconName} type='font-awesome' size={iconSize} color={tintColor} />
+  )
+});
+
+
 const MenuNavigator = createStackNavigator({
   Menu: {
     screen: Menu,
-    navigationOptions: ({ navigation }) => ({
-      headerLeft: <Icon name='menu' size={24} color='white'
-          onPress={() => navigation.toggleDrawer()} />
-    })
+    navigationOptions: mainNavigationOptions
   },
   Dishdetail: {
     screen: Dishdetail
   }
 }, {
   initialRouteName: 'Menu',
-  navigationOptions: {
-    headerStyle: {
-      backgroundColor: '#512DA8'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      color: '#fff'
-    }
-  }
+  navigationOptions: defaultNavigationOptions
 });
 
 const HomeNavigator = createStackNavigator({
   Home: { screen: Home }
 }, {
-  navigationOptions: stackNavigationOptions
+  navigationOptions: mainNavigationOptions
 });
 
 const ContactNavigator = createStackNavigator({
   Contact: { screen: Contact }
 }, {
-  navigationOptions: stackNavigationOptions
+  navigationOptions: mainNavigationOptions
 });
 
 const ReservationNavigator = createStackNavigator({
   Reservation: { screen: Reservation }
 }, {
-  navigationOptions: stackNavigationOptions
+  navigationOptions: mainNavigationOptions
 });
 
 const AboutNavigator = createStackNavigator({
   About: { screen: About }
 }, {
-  navigationOptions: stackNavigationOptions
+  navigationOptions: mainNavigationOptions
+});
+
+const FavoritesNavigator = createStackNavigator({
+  Favorites: { screen: Favorites }
+}, {
+  navigationOptions: mainNavigationOptions
 });
 
 const CustomDrawerContentComponent = (props) => (
@@ -99,53 +108,27 @@ const CustomDrawerContentComponent = (props) => (
 const MainNavigator = createDrawerNavigator({
   Home: {
     screen: HomeNavigator,
-    navigationOptions: {
-      title: 'Home',
-      drawerLabel: 'Home',
-      drawerIcon: ({ tintColor }) => (
-          <Icon name='home' type='font-awesome' size={24} color={tintColor} />
-      )
-    }
+    navigationOptions: createDrawerNavigationOptions({ title: 'Home', iconName: 'home' })
   },
   Menu: {
     screen: MenuNavigator,
-    navigationOptions: {
-      title: 'Menu',
-      drawerLabel: 'Menu',
-      drawerIcon: ({ tintColor }) => (
-          <Icon name='list' type='font-awesome' size={24} color={tintColor} />
-      )
-    }
+    navigationOptions: createDrawerNavigationOptions({ title: 'Menu', iconName: 'list' })
   },
   Contact: {
     screen: ContactNavigator,
-    navigationOptions: {
-      title: 'Contact Us',
-      drawerLabel: 'Contact Us',
-      drawerIcon: ({ tintColor }) => (
-          <Icon name='address-card' type='font-awesome' size={22} color={tintColor} />
-      )
-    }
+    navigationOptions: createDrawerNavigationOptions({ title: 'Contact Us', iconName: 'address-card', iconSize: 22 })
   },
   About: {
     screen: AboutNavigator,
-    navigationOptions: {
-      title: 'About Us',
-      drawerLabel: 'About Us',
-      drawerIcon: ({ tintColor }) => (
-          <Icon name='info-circle' type='font-awesome' size={24} color={tintColor} />
-      )
-    }
+    navigationOptions: createDrawerNavigationOptions({ title: 'About Us', iconName: 'info-circle' })
+  },
+  Favorites: {
+    screen: FavoritesNavigator,
+    navigationOptions: createDrawerNavigationOptions({ title: 'My Favorites', iconName: 'heart' })
   },
   Reservation: {
     screen: ReservationNavigator,
-    navigationOptions: {
-      title: 'Reserve Table',
-      drawerLabel: 'Reserve Table',
-      drawerIcon: ({ tintColor }) => (
-          <Icon name='cutlery' type='font-awesome' size={24} color={tintColor} />
-      )
-    }
+    navigationOptions: createDrawerNavigationOptions({ title: 'Reserve Table', iconName: 'cutlery' })
   }
 }, {
   drawerBackgroundColor: '#D1C4E9',
