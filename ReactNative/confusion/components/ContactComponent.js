@@ -31,7 +31,7 @@ class Contact extends Component {
             <Button title='Send Email'
                 buttonStyle={{ backgroundColor: '#512da8' }}
                 icon={<Icon name='envelope-o' type='font-awesome' color='white' />}
-                onPress={this.sendMail}
+                onPress={Contact.sendMail}
             />
           </Card>
         </Animatable.View>

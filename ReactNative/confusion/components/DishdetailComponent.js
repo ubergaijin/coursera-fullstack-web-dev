@@ -61,8 +61,7 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
     // noinspection JSIgnoredPromiseFromCall
     Share.share({
       title: title,
-      message: title + ': ' + message + ' ' + url,
-      url: url
+      message: title + ': ' + message + ' ' + url
     }, {
       dialogTitle: 'Share ' + title
     });
@@ -228,7 +227,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    backgroundColor: '#512d8a',
+    backgroundColor: '#512da8',
     textAlign: 'center',
     color: 'white',
     marginBottom: 20

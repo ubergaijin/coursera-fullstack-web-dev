@@ -4,6 +4,9 @@
     <list default="true" id="520244e7-793e-47ed-969d-ca1668ad378c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ContactComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ContactComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/DishdetailComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DishdetailComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LoginComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ReservationComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ReservationComponent.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,10 +31,10 @@
         <counts>
           <entry key="flowconfig" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="js" value="85" />
+          <entry key="js" value="89" />
           <entry key="json" value="6" />
           <entry key="png" value="1" />
-          <entry key="ts" value="1" />
+          <entry key="ts" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -39,24 +42,24 @@
           <entry key="Image" value="1" />
           <entry key="Ini" value="1" />
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="85" />
+          <entry key="JavaScript" value="89" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="TypeScript" value="1" />
+          <entry key="TypeScript" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="23899" />
+          <entry key="js" value="25922" />
           <entry key="json" value="15" />
-          <entry key="txt" value="292" />
+          <entry key="txt" value="324" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="1" />
           <entry key="JSON" value="15" />
-          <entry key="JavaScript" value="23898" />
-          <entry key="PLAIN_TEXT" value="292" />
+          <entry key="JavaScript" value="25921" />
+          <entry key="PLAIN_TEXT" value="324" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -69,11 +72,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/ReservationComponent.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/components/LoginComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="79" column="8" lean-forward="true" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+            <state relative-caret-position="435">
+              <caret line="244" column="13" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="13" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -81,11 +84,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/ContactComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            <state relative-caret-position="333">
+              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/MainComponent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="8" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -121,7 +136,17 @@
       <find>Loader</find>
       <find>props</find>
       <find>view</find>
+      <find>Login</find>
+      <find>#512ad8</find>
+      <find>#512</find>
+      <find>#512d8a</find>
+      <find>Register</find>
+      <find>envel</find>
+      <find>dele</find>
     </findStrings>
+    <replaceStrings>
+      <replace>#512da8</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -145,12 +170,12 @@
         <option value="$PROJECT_DIR$/redux/configureStore.js" />
         <option value="$PROJECT_DIR$/shared/baseUrl.js" />
         <option value="$PROJECT_DIR$/components/MenuComponent.js" />
-        <option value="$PROJECT_DIR$/components/DishdetailComponent.js" />
-        <option value="$PROJECT_DIR$/components/MainComponent.js" />
-        <option value="$PROJECT_DIR$/components/LoginComponent.js" />
         <option value="$PROJECT_DIR$/components/AboutComponent.js" />
         <option value="$PROJECT_DIR$/components/ReservationComponent.js" />
+        <option value="$PROJECT_DIR$/components/DishdetailComponent.js" />
         <option value="$PROJECT_DIR$/components/ContactComponent.js" />
+        <option value="$PROJECT_DIR$/components/MainComponent.js" />
+        <option value="$PROJECT_DIR$/components/LoginComponent.js" />
       </list>
     </option>
   </component>
@@ -508,7 +533,28 @@
       <option name="project" value="LOCAL" />
       <updated>1541684230428</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="react native sending email">
+      <created>1541690065188</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1541690065188</updated>
+    </task>
+    <task id="LOCAL-00025" summary="react native sending email">
+      <created>1541690112537</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1541690112537</updated>
+    </task>
+    <task id="LOCAL-00026" summary="react native social sharing">
+      <created>1541691296186</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1541691296186</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -518,13 +564,13 @@
       <window_info id="npm" order="0" sideWeight="0.5312102" side_tool="true" weight="0.23652968" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4" weight="0.22466423" />
       <window_info id="Structure" order="2" sideWeight="0.6" side_tool="true" weight="0.20702179" />
-      <window_info id="Project Explorer" order="3" />
+      <window_info id="Project Explorer" order="3" weight="0.32967034" />
       <window_info id="Job Explorer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="TypeScript" weight="0.3299363" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49913645" visible="true" weight="0.26496816" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49913645" weight="0.26496816" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.21019109" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -607,7 +653,9 @@
     <MESSAGE value="react native secure store" />
     <MESSAGE value="react native present local notifications" />
     <MESSAGE value="react native android vibrate" />
-    <option name="LAST_COMMIT_MESSAGE" value="react native android vibrate" />
+    <MESSAGE value="react native sending email" />
+    <MESSAGE value="react native social sharing" />
+    <option name="LAST_COMMIT_MESSAGE" value="react native social sharing" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.expo/settings.json">
@@ -753,30 +801,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/MainComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="122" column="4" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/expo/build/Expo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="107" column="12" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LoginComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -790,16 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/DishdetailComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -807,20 +825,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/global-types/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="301" column="8" selection-start-line="301" selection-start-column="8" selection-end-line="301" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/ReservationComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="79" column="8" lean-forward="true" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+        <state relative-caret-position="270">
+          <caret line="98" column="39" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/components/DishdetailComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="69" column="21" lean-forward="true" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/ContactComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+        <state relative-caret-position="333">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/MainComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LoginComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="244" column="13" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="13" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
