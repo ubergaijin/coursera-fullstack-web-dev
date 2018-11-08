@@ -9,7 +9,8 @@ class Contact extends Component {
     title: 'Contact Us'
   };
 
-  sendMail() {
+  static sendMail() {
+    // noinspection JSIgnoredPromiseFromCall
     MailComposer.composeAsync({
       recipients: ['confusion@food.net'],
       subject: 'Enquiry',

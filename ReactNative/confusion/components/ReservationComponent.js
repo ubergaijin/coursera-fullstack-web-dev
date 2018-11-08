@@ -9,6 +9,34 @@ class Reservation extends Component {
     title: 'Reserve Table'
   };
 
+  static async obtainNotificationPermission() {
+    let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
+    if (permission.status !== 'granted') {
+      permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
+      if (permission.status !== 'granted') {
+        Alert.alert('Permission not granted to show notification');
+      }
+    }
+    return permission;
+  }
+
+  static async presentLocalNotification(date) {
+    await Reservation.obtainNotificationPermission();
+
+    // noinspection JSIgnoredPromiseFromCall
+    Notifications.presentLocalNotificationAsync({
+      title: 'Your Reservation',
+      body: 'Reservation for ' + date + ' requested',
+      ios: {
+        sound: true
+      },
+      android: {
+        channelId: 'reservation',
+        color: '#512da8'
+      }
+    });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +44,16 @@ class Reservation extends Component {
       smoking: false,
       date: ''
     };
+  }
+
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      Notifications.createChannelAndroidAsync('reservation', {
+        name: 'Reservation',
+        sound: true,
+        vibrate: true
+      });
+    }
   }
 
   handleReservation() {
@@ -31,7 +69,8 @@ class Reservation extends Component {
           {
             text: 'OK',
             onPress: () => {
-              this.presentLocalNotification(this.state.date);
+              // noinspection JSIgnoredPromiseFromCall
+              Reservation.presentLocalNotification(this.state.date);
               this.resetForm();
             }
           }
@@ -45,43 +84,6 @@ class Reservation extends Component {
       guest: 1,
       smoking: false,
       date: ''
-    });
-  }
-
-  componentDidMount() {
-    if (Platform.OS === 'android') {
-      Notifications.createChannelAndroidAsync('reservation', {
-        name: 'Reservation',
-        sound: true,
-        vibrate: true
-      });
-    }
-  }
-
-  async obtainNotificationPermission() {
-    let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
-    if (permission.status !== 'granted') {
-      permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
-      if (permission.status !== 'granted') {
-        Alert.alert('Permission not granted to show notification');
-      }
-    }
-    return permission;
-  }
-
-  async presentLocalNotification(date) {
-    await this.obtainNotificationPermission();
-
-    Notifications.presentLocalNotificationAsync({
-      title: 'Your Reservation',
-      body: 'Reservation for ' + date + ' requested',
-      ios: {
-        sound: true
-      },
-      android: {
-        channelId: 'reservation',
-        color: '#512da8'
-      }
     });
   }
 

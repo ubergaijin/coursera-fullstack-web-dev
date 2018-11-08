@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, FlatList, Modal, ScrollView, StyleSheet, Text, View, Alert, PanResponder } from 'react-native';
+import { Button, FlatList, Modal, ScrollView, StyleSheet, Text, View, Alert, PanResponder, Share } from 'react-native';
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -57,6 +57,17 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
     }
   });
 
+  const shareDish = (title, message, url) => {
+    // noinspection JSIgnoredPromiseFromCall
+    Share.share({
+      title: title,
+      message: title + ': ' + message + ' ' + url,
+      url: url
+    }, {
+      dialogTitle: 'Share ' + title
+    });
+  };
+
   if (dish != null) {
     return (
         <Animatable.View animation='fadeInDown' duration={2000} delay={1000}
@@ -67,11 +78,16 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
               {dish.description}
             </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <Icon raised reverse name={favorite ? 'heart' : 'heart-o'}
-                  type='font-awesome' color='#f50'
+              <Icon name={favorite ? 'heart' : 'heart-o'}
+                  raised reverse type='font-awesome' color='#f50'
                   onPress={() => favorite ? console.log('Already favorite') : onPressFavorite()} />
-              <Icon raised reverse name='pencil' type='font-awesome' color='#512da8'
+              <Icon name='pencil'
+                  raised reverse type='font-awesome' color='#512da8'
                   onPress={() => onPressComment()} />
+              <Icon name='share'
+                  raised reverse type='font-awesome' color='#512da8'
+                  style={styles.cardItem}
+                  onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)} />
             </View>
           </Card>
         </Animatable.View>
