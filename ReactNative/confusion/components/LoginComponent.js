@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, Image } from 'react-native';
+import { View, StyleSheet, ScrollView, Image } from 'react-native';
 import { Icon, Input, CheckBox, Button } from 'react-native-elements';
-import { SecureStore, Permissions, ImagePicker } from 'expo';
+import { SecureStore, Permissions, ImagePicker, ImageManipulator } from 'expo';
 import { createBottomTabNavigator } from 'react-navigation';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -147,9 +147,20 @@ class RegisterTab extends Component {
       });
 
       if (!capturedImage.cancelled) {
-        this.setState({ imageUrl: capturedImage.uri });
+        // noinspection JSIgnoredPromiseFromCall
+        this.processImage(capturedImage.uri);
       }
     }
+  };
+
+  processImage = async (imageUri) => {
+    let processedImage = await ImageManipulator.manipulateAsync(imageUri,
+        [
+          { resize: { width: 400 } }
+        ],
+        { format: 'png' }
+    );
+    this.setState({ imageUrl: processedImage.uri });
   };
 
   render() {
