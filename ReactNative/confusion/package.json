@@ -16,6 +16,7 @@
     "react-native": "0.57.1",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^1.0.0-beta7",
+    "react-native-swipeout": "^2.3.6",
     "react-navigation": "^2.18.2",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",

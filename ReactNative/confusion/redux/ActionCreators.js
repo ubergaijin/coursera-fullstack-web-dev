@@ -105,6 +105,11 @@ export const addFavorite = (dishId) => ({
   payload: dishId
 });
 
+export const deleteFavorite = (dishId) => ({
+  type: ActionTypes.DELETE_FAVORITE,
+  payload: dishId
+});
+
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
   const date = (new Date()).toISOString();
   setTimeout(() => dispatch(addComment(dishId, rating, author, comment, date)), 2000);
