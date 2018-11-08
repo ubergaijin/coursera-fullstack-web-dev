@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Picker, Switch, Button, Alert } from 'react-native';
+import { Text, View, StyleSheet, Picker, Switch, Button, Alert, Platform } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
 import { Permissions, Notifications } from 'expo';
@@ -32,7 +32,7 @@ class Reservation extends Component {
             text: 'OK',
             onPress: () => {
               this.presentLocalNotification(this.state.date);
-              this.resetForm()
+              this.resetForm();
             }
           }
         ],
@@ -48,6 +48,16 @@ class Reservation extends Component {
     });
   }
 
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      Notifications.createChannelAndroidAsync('reservation', {
+        name: 'Reservation',
+        sound: true,
+        vibrate: true
+      });
+    }
+  }
+
   async obtainNotificationPermission() {
     let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
     if (permission.status !== 'granted') {
@@ -61,6 +71,7 @@ class Reservation extends Component {
 
   async presentLocalNotification(date) {
     await this.obtainNotificationPermission();
+
     Notifications.presentLocalNotificationAsync({
       title: 'Your Reservation',
       body: 'Reservation for ' + date + ' requested',
@@ -68,8 +79,7 @@ class Reservation extends Component {
         sound: true
       },
       android: {
-        sound: true,
-        vibrate: true,
+        channelId: 'reservation',
         color: '#512da8'
       }
     });
