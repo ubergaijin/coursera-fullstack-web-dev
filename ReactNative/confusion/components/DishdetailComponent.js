@@ -58,13 +58,12 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
   });
 
   const shareDish = (title, message, url) => {
-    // noinspection JSIgnoredPromiseFromCall
     Share.share({
       title: title,
       message: title + ': ' + message + ' ' + url
     }, {
       dialogTitle: 'Share ' + title
-    });
+    }).catch(error => console.error(error));
   };
 
   if (dish != null) {
@@ -85,7 +84,6 @@ function RenderDish({ dish, favorite, onPressFavorite, onPressComment }) {
                   onPress={() => onPressComment()} />
               <Icon name='share'
                   raised reverse type='font-awesome' color='#512da8'
-                  style={styles.cardItem}
                   onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)} />
             </View>
           </Card>

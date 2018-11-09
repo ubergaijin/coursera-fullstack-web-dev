@@ -10,12 +10,11 @@ class Contact extends Component {
   };
 
   static sendMail() {
-    // noinspection JSIgnoredPromiseFromCall
     MailComposer.composeAsync({
       recipients: ['confusion@food.net'],
       subject: 'Enquiry',
       body: 'To whom it may concern:'
-    });
+    }).catch(error => console.error(error));
   }
 
   render() {

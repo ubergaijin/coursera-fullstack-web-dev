@@ -147,7 +147,6 @@ class RegisterTab extends Component {
       });
 
       if (!capturedImage.cancelled) {
-        // noinspection JSIgnoredPromiseFromCall
         this.processImage(capturedImage.uri);
       }
     }
@@ -164,8 +163,8 @@ class RegisterTab extends Component {
       });
 
       if (!capturedImage.cancelled) {
-        // noinspection JSIgnoredPromiseFromCall
-        this.processImage(capturedImage.uri);
+        this.processImage(capturedImage.uri)
+            .catch(error => console.error(error));
       }
     }
   };

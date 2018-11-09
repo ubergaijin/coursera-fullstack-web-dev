@@ -23,7 +23,6 @@ class Reservation extends Component {
   static async presentLocalNotification(date) {
     await Reservation.obtainNotificationPermission();
 
-    // noinspection JSIgnoredPromiseFromCall
     Notifications.presentLocalNotificationAsync({
       title: 'Your Reservation',
       body: 'Reservation for ' + date + ' requested',
@@ -34,7 +33,7 @@ class Reservation extends Component {
         channelId: 'reservation',
         color: '#512da8'
       }
-    });
+    }).catch(error => console.error(error));
   }
 
   static async obtainCalendarPermission() {
@@ -54,14 +53,13 @@ class Reservation extends Component {
 
     await Reservation.obtainCalendarPermission();
 
-    // noinspection JSIgnoredPromiseFromCall
     Calendar.createEventAsync(Calendar.DEFAULT, {
       title: 'Con Fusion Table Reservation',
       startDate: startDate,
       endDate: endDate,
       timeZone: 'Asia/Hong_Kong',
       location: '121, Clear Water Bay Road, Clear Water Bay, Kowloon, Hong Kong'
-    });
+    }).catch(error => console.error(error));
   }
 
   constructor(props) {
@@ -96,10 +94,10 @@ class Reservation extends Component {
           {
             text: 'OK',
             onPress: () => {
-              // noinspection JSIgnoredPromiseFromCall
-              Reservation.presentLocalNotification(this.state.date);
-              // noinspection JSIgnoredPromiseFromCall
-              Reservation.addReservationToCalendar(this.state.date);
+              Reservation.presentLocalNotification(this.state.date)
+                  .catch(error => console.error(error));
+              Reservation.addReservationToCalendar(this.state.date)
+                  .catch(error => console.error(error));
               this.resetForm();
             }
           }

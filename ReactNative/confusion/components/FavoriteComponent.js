@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, FlatList, Alert, ScrollView } from 'react-native';
+import { View, Text, FlatList, Alert} from 'react-native';
 import { ListItem } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
 import { connect } from 'react-redux';
