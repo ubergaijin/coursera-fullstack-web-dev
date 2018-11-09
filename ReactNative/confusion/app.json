@@ -25,10 +25,20 @@
     ],
     "ios": {
       "bundleIdentifier": "net.food.confusion.confusion",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "publishBundlePath": "ios/confusion/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/confusion/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "net.food.confusion.confusion"
-    }
+      "package": "net.food.confusion.confusion",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    },
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.9.0-sdk31.0.0-250a3991-b623-4f9c-b07f-0b9ed7e8c4c9.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.0-sdk31.0.0-91d15219-d0a0-42a6-8f40-a768710d4664.tar.gz"
+    },
+    "scheme": "expf2afddae2555477684c6618f0ec8c577"
   }
 }
