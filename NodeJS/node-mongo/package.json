@@ -1,0 +1,16 @@
+{
+  "name": "node-mongo",
+  "version": "1.0.0",
+  "description": "Node MongoDB Example",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Siri",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "mongodb": "^3.1.9"
+  }
+}
