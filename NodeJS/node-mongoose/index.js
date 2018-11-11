@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Dishes = require('./models/dishes');
 
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 const url = 'mongodb://localhost:27017/conFusion';
 const connect = mongoose.connect(url, { useNewUrlParser: true });
@@ -16,10 +17,23 @@ connect.then(db => {
       .then(dish => {
         console.log(dish);
 
-        return Dishes.find({}).exec();
+        return Dishes.findOneAndUpdate(dish._id,
+            { $set: { description: 'Updated test' } },
+            { new: true }).exec();
       })
-      .then(dishes => {
-        console.log(dishes);
+      .then(dish => {
+        console.log(dish);
+
+        dish.comments.push({
+          rating: 5,
+          comment: 'I\'m getting a sinking feeling!',
+          author: 'Leonardo di Carpaccio'
+        });
+
+        return dish.save();
+      })
+      .then(dish => {
+        console.log(dish);
 
         return Dishes.deleteMany({});
       })

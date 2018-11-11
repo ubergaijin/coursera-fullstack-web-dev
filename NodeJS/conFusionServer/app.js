@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -10,7 +11,19 @@ const dishRouter = require('./routes/dishRouter');
 const promoRouter = require('./routes/promoRouter');
 const leaderRouter = require('./routes/leaderRouter');
 
-var app = express();
+const url = 'mongodb://localhost:27017/dishes';
+const opts = { useNewUrlParser: true };
+
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
+
+mongoose.connect(url, opts)
+    .then(() => {
+      console.log('Connected correctly to the server');
+    })
+    .catch(err => console.log(err));
+
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,12 +42,12 @@ app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
