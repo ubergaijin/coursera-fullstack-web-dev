@@ -1,5 +1,6 @@
 const express = require('express');
 const Dishes = require('../models/dishes');
+const authenticate = require('../authenticate');
 
 const dishRouter = express.Router();
 
@@ -38,13 +39,13 @@ dishRouter.route('/')
     .get((req, res, next) => {
       Dishes.find({}).then(dishes => res.json(dishes), err => next(err));
     })
-    .post((req, res, next) => {
+    .post(authenticate.verifyUser, (req, res, next) => {
       Dishes.create(req.body).then(dishes => res.json(dishes), err => next(err));
     })
-    .put((req, res) => {
+    .put(authenticate.verifyUser, (req, res) => {
       res.status(403).end(`PUT operation not supported on /dishes`);
     })
-    .delete((req, res, next) => {
+    .delete(authenticate.verifyUser, (req, res, next) => {
       Dishes.remove({}).then(resp => res.json(resp), err => next(err));
     });
 
@@ -52,10 +53,10 @@ dishRouter.route('/:dishId')
     .get(({ params: { dishId } }, res, next) => {
       getLeaderById(dishId).then(dish => res.json(dish), err => next(err));
     })
-    .post(({ params: { dishId } }, res) => {
+    .post(authenticate.verifyUser, ({ params: { dishId } }, res) => {
       res.status(403).end(`POST operation not supported on /dishes/${dishId}`);
     })
-    .put(({ body, params: { dishId } }, res, next) => {
+    .put(authenticate.verifyUser, ({ body, params: { dishId } }, res, next) => {
       getLeaderById(dishId)
           .then(dish => {
             dish.set(body);
@@ -64,7 +65,7 @@ dishRouter.route('/:dishId')
           .then(dish => res.json(dish))
           .catch(err => next(err));
     })
-    .delete(({ params: { dishId } }, res, next) => {
+    .delete(authenticate.verifyUser, ({ params: { dishId } }, res, next) => {
       getLeaderById(dishId)
           .then(dish => dish.remove())
           .then(dish => res.json(dish))
@@ -75,7 +76,7 @@ dishRouter.route('/:dishId/comments')
     .get(({ params: { dishId } }, res, next) => {
       getLeaderById(dishId).then(dish => res.json(dish.comments), err => next(err));
     })
-    .post(({ body, params: { dishId } }, res, next) => {
+    .post(authenticate.verifyUser, ({ body, params: { dishId } }, res, next) => {
       getLeaderById(dishId)
           .then(dish => {
             dish.comments.push(body);
@@ -84,10 +85,10 @@ dishRouter.route('/:dishId/comments')
           .then(dish => res.json(dish))
           .catch(err => next(err));
     })
-    .put(({ params: { dishId } }, res) => {
+    .put(authenticate.verifyUser, ({ params: { dishId } }, res) => {
       res.status(403).end(`PUT operation not supported on /dishes/${dishId}/comments`);
     })
-    .delete(({ params: { dishId } }, res, next) => {
+    .delete(authenticate.verifyUser, ({ params: { dishId } }, res, next) => {
       getLeaderById(dishId)
           .then(dish => {
             dish.comments = [];
@@ -102,10 +103,10 @@ dishRouter.route('/:dishId/comments/:commentId')
       getDishAndCommentById(dishId, commentId)
           .then(({ comment }) => res.json(comment), err => next(err));
     })
-    .post(({ params: { dishId, commentId } }, res) => {
+    .post(authenticate.verifyUser, ({ params: { dishId, commentId } }, res) => {
       res.status(403).end(`POST operation not supported on /dishes/${dishId}/comments/${commentId}`);
     })
-    .put(({ body, params: { dishId, commentId } }, res, next) => {
+    .put(authenticate.verifyUser, ({ body, params: { dishId, commentId } }, res, next) => {
       getDishAndCommentById(dishId, commentId)
           .then(({ dish, comment }) => {
             if (body.rating) { comment.rating = body.rating; }
@@ -115,7 +116,7 @@ dishRouter.route('/:dishId/comments/:commentId')
           .then(dish => res.json(dish))
           .catch(err => next(err));
     })
-    .delete(({ params: { dishId, commentId } }, res, next) => {
+    .delete(authenticate.verifyUser, ({ params: { dishId, commentId } }, res, next) => {
       getDishAndCommentById(dishId, commentId)
           .then(({ dish, comment }) => {
             comment.remove();

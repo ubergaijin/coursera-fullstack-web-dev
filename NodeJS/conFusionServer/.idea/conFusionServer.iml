@@ -9,6 +9,11 @@
     <orderEntry type="library" name="@types/morgan" level="application" />
     <orderEntry type="library" name="@types/mongodb" level="application" />
     <orderEntry type="library" name="@types/mongoose" level="application" />
+    <orderEntry type="library" name="@types/passport" level="application" />
+    <orderEntry type="library" name="@types/passport-local" level="application" />
+    <orderEntry type="library" name="@types/passport-local-mongoose" level="application" />
+    <orderEntry type="library" name="@types/passport-jwt" level="application" />
+    <orderEntry type="library" name="@types/jsonwebtoken" level="application" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
