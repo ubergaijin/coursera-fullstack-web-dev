@@ -3,7 +3,7 @@ const Dishes = require('../models/dishes');
 
 const dishRouter = express.Router();
 
-getDishById = (dishId) => {
+getLeaderById = (dishId) => {
   return new Promise((resolve, reject) => {
     Dishes.findById(dishId)
         .then(dish => {
@@ -20,7 +20,7 @@ getDishById = (dishId) => {
 
 getDishAndCommentById = (dishId, commentId) => {
   return new Promise((resolve, reject) => {
-    getDishById(dishId)
+    getLeaderById(dishId)
         .then(dish => {
           const comment = dish.comments.id(commentId);
           if (comment != null) {
@@ -50,29 +50,29 @@ dishRouter.route('/')
 
 dishRouter.route('/:dishId')
     .get(({ params: { dishId } }, res, next) => {
-      getDishById(dishId).then(dish => res.json(dish), err => next(err));
+      getLeaderById(dishId).then(dish => res.json(dish), err => next(err));
     })
     .post(({ params: { dishId } }, res) => {
       res.status(403).end(`POST operation not supported on /dishes/${dishId}`);
     })
     .put(({ body, params: { dishId } }, res, next) => {
-      getDishById(dishId).then(dish => {
+      getLeaderById(dishId).then(dish => {
         dish.set(body);
         dish.save().then(dish => res.json(dish), err => next(err));
       }, err => next(err));
     })
     .delete(({ params: { dishId } }, res, next) => {
-      getDishById(dishId).then(dish => {
+      getLeaderById(dishId).then(dish => {
         dish.remove().then(dish => res.json(dish), err => next(err));
       }, err => next(err));
     });
 
 dishRouter.route('/:dishId/comments')
     .get(({ params: { dishId } }, res, next) => {
-      getDishById(dishId).then(dish => res.json(dish.comments), err => next(err));
+      getLeaderById(dishId).then(dish => res.json(dish.comments), err => next(err));
     })
     .post(({ body, params: { dishId } }, res, next) => {
-      getDishById(dishId).then(dish => {
+      getLeaderById(dishId).then(dish => {
         dish.comments.push(body);
         dish.save().then(dish => res.json(dish), err => next(err));
       }, err => next(err));
@@ -81,7 +81,7 @@ dishRouter.route('/:dishId/comments')
       res.status(403).end(`PUT operation not supported on /dishes/${dishId}/comments`);
     })
     .delete(({ params: { dishId } }, res, next) => {
-      getDishById(dishId).then(dish => {
+      getLeaderById(dishId).then(dish => {
         dish.comments = [];
         dish.save().then(dish => res.json(dish), err => next(err));
       }, err => next(err));
