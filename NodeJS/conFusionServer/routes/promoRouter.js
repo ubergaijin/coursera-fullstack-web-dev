@@ -3,7 +3,7 @@ const Promotions = require('../models/promotions');
 
 const promoRouter = express.Router();
 
-getLeaderById = (id) => {
+getPromoById = (id) => {
   return new Promise((resolve, reject) => {
     Promotions.findById(id)
         .then(promo => {
@@ -34,19 +34,19 @@ promoRouter.route('/')
 
 promoRouter.route('/:id')
     .get(({ params: { id } }, res, next) => {
-      getLeaderById(id).then(promo => res.json(promo), err => next(err));
+      getPromoById(id).then(promo => res.json(promo), err => next(err));
     })
     .post(({ params: { id } }, res) => {
       res.status(403).end(`POST operation not supported on /promotions/${id}`);
     })
     .put(({ body, params: { id } }, res, next) => {
-      getLeaderById(id).then(promo => {
+      getPromoById(id).then(promo => {
         promo.set(body);
         promo.save().then(promo => res.json(promo), err => next(err));
       }, err => next(err));
     })
     .delete(({ params: { id } }, res, next) => {
-      getLeaderById(id).then(promo => {
+      getPromoById(id).then(promo => {
         promo.remove().then(promo => res.json(promo), err => next(err));
       }, err => next(err));
     });
