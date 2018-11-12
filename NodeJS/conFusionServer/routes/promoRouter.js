@@ -40,15 +40,19 @@ promoRouter.route('/:id')
       res.status(403).end(`POST operation not supported on /promotions/${id}`);
     })
     .put(({ body, params: { id } }, res, next) => {
-      getPromoById(id).then(promo => {
-        promo.set(body);
-        promo.save().then(promo => res.json(promo), err => next(err));
-      }, err => next(err));
+      getPromoById(id)
+          .then(promo => {
+            promo.set(body);
+            return promo.save();
+          })
+          .then(promo => res.json(promo))
+          .catch(err => next(err));
     })
     .delete(({ params: { id } }, res, next) => {
-      getPromoById(id).then(promo => {
-        promo.remove().then(promo => res.json(promo), err => next(err));
-      }, err => next(err));
+      getPromoById(id)
+          .then(promo => promo.remove())
+          .then(promo => res.json(promo))
+          .catch(err => next(err));
     });
 
 module.exports = promoRouter;

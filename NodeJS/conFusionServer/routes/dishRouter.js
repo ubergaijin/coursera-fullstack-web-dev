@@ -56,15 +56,19 @@ dishRouter.route('/:dishId')
       res.status(403).end(`POST operation not supported on /dishes/${dishId}`);
     })
     .put(({ body, params: { dishId } }, res, next) => {
-      getLeaderById(dishId).then(dish => {
-        dish.set(body);
-        dish.save().then(dish => res.json(dish), err => next(err));
-      }, err => next(err));
+      getLeaderById(dishId)
+          .then(dish => {
+            dish.set(body);
+            return dish.save();
+          })
+          .then(dish => res.json(dish))
+          .catch(err => next(err));
     })
     .delete(({ params: { dishId } }, res, next) => {
-      getLeaderById(dishId).then(dish => {
-        dish.remove().then(dish => res.json(dish), err => next(err));
-      }, err => next(err));
+      getLeaderById(dishId)
+          .then(dish => dish.remove())
+          .then(dish => res.json(dish))
+          .catch(err => next(err));
     });
 
 dishRouter.route('/:dishId/comments')
@@ -72,19 +76,25 @@ dishRouter.route('/:dishId/comments')
       getLeaderById(dishId).then(dish => res.json(dish.comments), err => next(err));
     })
     .post(({ body, params: { dishId } }, res, next) => {
-      getLeaderById(dishId).then(dish => {
-        dish.comments.push(body);
-        dish.save().then(dish => res.json(dish), err => next(err));
-      }, err => next(err));
+      getLeaderById(dishId)
+          .then(dish => {
+            dish.comments.push(body);
+            return dish.save();
+          })
+          .then(dish => res.json(dish))
+          .catch(err => next(err));
     })
     .put(({ params: { dishId } }, res) => {
       res.status(403).end(`PUT operation not supported on /dishes/${dishId}/comments`);
     })
     .delete(({ params: { dishId } }, res, next) => {
-      getLeaderById(dishId).then(dish => {
-        dish.comments = [];
-        dish.save().then(dish => res.json(dish), err => next(err));
-      }, err => next(err));
+      getLeaderById(dishId)
+          .then(dish => {
+            dish.comments = [];
+            return dish.save();
+          })
+          .then(dish => res.json(dish))
+          .catch(err => next(err));
     });
 
 dishRouter.route('/:dishId/comments/:commentId')
@@ -96,17 +106,23 @@ dishRouter.route('/:dishId/comments/:commentId')
       res.status(403).end(`POST operation not supported on /dishes/${dishId}/comments/${commentId}`);
     })
     .put(({ body, params: { dishId, commentId } }, res, next) => {
-      getDishAndCommentById(dishId, commentId).then(({ dish, comment }) => {
-        if (body.rating) { comment.rating = body.rating; }
-        if (body.comment) { comment.comment = body.comment; }
-        dish.save().then(dish => res.json(dish), err => next(err));
-      }, err => next(err));
+      getDishAndCommentById(dishId, commentId)
+          .then(({ dish, comment }) => {
+            if (body.rating) { comment.rating = body.rating; }
+            if (body.comment) { comment.comment = body.comment; }
+            return dish.save();
+          })
+          .then(dish => res.json(dish))
+          .catch(err => next(err));
     })
     .delete(({ params: { dishId, commentId } }, res, next) => {
-      getDishAndCommentById(dishId, commentId).then(({ dish, comment }) => {
-        comment.remove();
-        dish.save().then(dish => res.json(dish), err => next(err));
-      }, err => next(err));
+      getDishAndCommentById(dishId, commentId)
+          .then(({ dish, comment }) => {
+            comment.remove();
+            return dish.save();
+          })
+          .then(dish => res.json(dish))
+          .catch(err => next(err));
     });
 
 module.exports = dishRouter;

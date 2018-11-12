@@ -1,7 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -13,16 +12,14 @@ const dishRouter = require('./routes/dishRouter');
 const promoRouter = require('./routes/promoRouter');
 const leaderRouter = require('./routes/leaderRouter');
 
-const url = 'mongodb://localhost:27017/dishes';
-const opts = { useNewUrlParser: true };
-
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
+const url = 'mongodb://localhost:27017/dishes';
+const opts = { useNewUrlParser: true };
+
 mongoose.connect(url, opts)
-    .then(() => {
-      console.log('Connected correctly to the server');
-    })
+    .then(() => console.log('Connected correctly to the server'))
     .catch(err => console.log(err));
 
 let app = express();
@@ -43,38 +40,25 @@ app.use(session({
   store: new FileStore()
 }));
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
 app.use(function (req, res, next) {
   console.log(req.session);
 
   if (!req.session.user) {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader) {
-      res.setHeader('WWW-Authenticate', 'Basic');
-      next(createError(401, 'You are not authenticated!'));
-    } else {
-      const [username, password] = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-
-      if (username === 'admin' && password === 'password') {
-        req.session.user = 'admin';
-        next();
-      } else {
-        next(createError(401, `${username}:${password} is not an authorized user!`));
-      }
-    }
+    next(createError(401, 'You are not authenticated!'));
   } else {
-    if (req.session.user === 'admin') {
+    if (req.session.user === 'authenticated') {
       next();
     } else {
-      next(createError(401, `${req.signedCookies.user} is not an authorized user!`));
+      next(createError(403, 'You are not authenticated!'));
     }
   }
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/dishes', dishRouter);
 app.use('/promotions', promoRouter);
 app.use('/leaders', leaderRouter);
