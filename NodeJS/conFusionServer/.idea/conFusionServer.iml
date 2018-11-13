@@ -14,6 +14,7 @@
     <orderEntry type="library" name="@types/passport-local-mongoose" level="application" />
     <orderEntry type="library" name="@types/passport-jwt" level="application" />
     <orderEntry type="library" name="@types/jsonwebtoken" level="application" />
+    <orderEntry type="library" name="@types/multer" level="application" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
