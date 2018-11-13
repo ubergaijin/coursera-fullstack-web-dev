@@ -30,9 +30,7 @@ getDishAndCommentById = (dishId, commentId, populate = false) => {
           if (comment != null) {
             resolve({ dish: dish, comment: comment });
           } else {
-            const err = new Error(`Comment ${commentId} not found`);
-            err.status = 404;
-            reject(err);
+            reject(createError(404, `Comment ${commentId} not found`));
           }
         }, err => reject(err));
   });
