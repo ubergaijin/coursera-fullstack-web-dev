@@ -1,4 +1,5 @@
 const express = require('express');
+const createError = require('http-errors');
 const Promotions = require('../models/promotions');
 const authenticate = require('../authenticate');
 
@@ -11,9 +12,7 @@ getPromoById = (id) => {
           if (promo != null) {
             resolve(promo);
           } else {
-            const err = new Error(`Promotion ${id} not found`);
-            err.status = 404;
-            reject(err);
+            reject(createError(404, `Promotion ${id} not found`));
           }
         }, err => reject(err));
   });
@@ -23,34 +22,36 @@ promoRouter.route('/')
     .get((req, res, next) => {
       Promotions.find({}).then(promos => res.json(promos), err => next(err));
     })
-    .post(authenticate.verifyUser, (req, res, next) => {
+    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       Promotions.create(req.body).then(promos => res.json(promos), err => next(err));
     })
-    .put(authenticate.verifyUser, (req, res) => {
+    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
       res.status(403).end(`PUT operation not supported on /promotions`);
     })
-    .delete(authenticate.verifyUser, (req, res, next) => {
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       Promotions.remove({}).then(resp => res.json(resp), err => next(err));
     });
 
 promoRouter.route('/:id')
-    .get(({ params: { id } }, res, next) => {
-      getPromoById(id).then(promo => res.json(promo), err => next(err));
+    .get((req, res, next) => {
+      getPromoById(req.params.id)
+          .then(promo => res.json(promo))
+          .catch(err => next(err));
     })
-    .post(authenticate.verifyUser, ({ params: { id } }, res) => {
-      res.status(403).end(`POST operation not supported on /promotions/${id}`);
+    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
+      res.status(403).end(`POST operation not supported on /promotions/${req.params.id}`);
     })
-    .put(authenticate.verifyUser, ({ body, params: { id } }, res, next) => {
-      getPromoById(id)
+    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+      getPromoById(req.params.id)
           .then(promo => {
-            promo.set(body);
+            promo.set(req.body);
             return promo.save();
           })
           .then(promo => res.json(promo))
           .catch(err => next(err));
     })
-    .delete(authenticate.verifyUser, ({ params: { id } }, res, next) => {
-      getPromoById(id)
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+      getPromoById(req.params.id)
           .then(promo => promo.remove())
           .then(promo => res.json(promo))
           .catch(err => next(err));

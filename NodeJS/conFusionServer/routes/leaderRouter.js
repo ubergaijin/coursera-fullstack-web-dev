@@ -1,6 +1,8 @@
 const express = require('express');
+const createError = require('http-errors');
 const Leaders = require('../models/leaders');
 const authenticate = require('../authenticate');
+
 const leaderRouter = express.Router();
 
 getLeaderById = (id) => {
@@ -10,9 +12,7 @@ getLeaderById = (id) => {
           if (leader != null) {
             resolve(leader);
           } else {
-            const err = new Error(`Leader ${id} not found`);
-            err.status = 404;
-            reject(err);
+            reject(createError(404, `Leader ${id} not found`));
           }
         }, err => reject(err));
   });
@@ -22,33 +22,39 @@ leaderRouter.route('/')
     .get((req, res, next) => {
       Leaders.find({}).then(leaders => res.json(leaders), err => next(err));
     })
-    .post(authenticate.verifyUser, (req, res, next) => {
+    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       Leaders.create(req.body).then(leaders => res.json(leaders), err => next(err));
     })
-    .put(authenticate.verifyUser, (req, res) => {
+    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
       res.status(403).end(`PUT operation not supported on /leaders`);
     })
-    .delete(authenticate.verifyUser, (req, res, next) => {
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       Leaders.remove({}).then(resp => res.json(resp), err => next(err));
     });
 
 leaderRouter.route('/:id')
-    .get(({ params: { id } }, res, next) => {
-      getLeaderById(id).then(leader => res.json(leader), err => next(err));
+    .get((req, res, next) => {
+      getLeaderById(req.params.id)
+          .then(leader => res.json(leader))
+          .catch(err => next(err));
     })
-    .post(authenticate.verifyUser, ({ params: { id } }, res) => {
-      res.status(403).end(`POST operation not supported on /leaders/${id}`);
+    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
+      res.status(403).end(`POST operation not supported on /leaders/${req.params.id}`);
     })
-    .put(authenticate.verifyUser, ({ body, params: { id } }, res, next) => {
-      getLeaderById(id).then(leader => {
-        leader.set(body);
-        leader.save().then(leader => res.json(leader), err => next(err));
-      }, err => next(err));
+    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+      getLeaderById(req.params.id)
+          .then(leader => {
+            leader.set(req.body);
+            return leader.save();
+          })
+          .then(leader => res.json(leader))
+          .catch(err => next(err));
     })
-    .delete(authenticate.verifyUser, ({ params: { id } }, res, next) => {
-      getLeaderById(id).then(leader => {
-        leader.remove().then(leader => res.json(leader), err => next(err));
-      }, err => next(err));
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+      getLeaderById(req.params.id)
+          .then(leader => leader.remove())
+          .then(leader => res.json(leader))
+          .catch(err => next(err));
     });
 
 module.exports = leaderRouter;

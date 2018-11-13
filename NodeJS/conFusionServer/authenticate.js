@@ -1,4 +1,5 @@
 const passport = require('passport');
+const createError = require('http-errors');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -35,3 +36,13 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
     }));
 
 exports.verifyUser = passport.authenticate('jwt', { session: false });
+
+exports.verifyAdmin = (req, res, next) => {
+  if (!req.user) {
+    next(createError(403, 'You are not authenticated!'));
+  } else if (!req.user.admin) {
+    next(createError(403, 'You are not authorized to perform this operation!'));
+  } else {
+    next();
+  }
+};

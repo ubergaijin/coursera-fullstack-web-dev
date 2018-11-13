@@ -1,4 +1,5 @@
 const express = require('express');
+const createError = require('http-errors');
 const Dishes = require('../models/dishes');
 const authenticate = require('../authenticate');
 
@@ -14,9 +15,7 @@ getDishById = (dishId, populate = false) => {
       if (dish != null) {
         resolve(dish);
       } else {
-        const err = new Error(`Dish ${dishId} not found`);
-        err.status = 404;
-        reject(err);
+        reject(createError(404, `Dish ${dishId} not found`));
       }
     }, err => reject(err));
   });
@@ -43,13 +42,13 @@ dishRouter.route('/')
       Dishes.find({}).populate('comments.author')
           .then(dishes => res.json(dishes), err => next(err));
     })
-    .post(authenticate.verifyUser, (req, res, next) => {
+    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       Dishes.create(req.body).then(dishes => res.json(dishes), err => next(err));
     })
-    .put(authenticate.verifyUser, (req, res) => {
+    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
       res.status(403).end(`PUT operation not supported on /dishes`);
     })
-    .delete(authenticate.verifyUser, (req, res, next) => {
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       Dishes.remove({}).then(resp => res.json(resp), err => next(err));
     });
 
@@ -59,10 +58,10 @@ dishRouter.route('/:dishId')
           .then(dish => res.json(dish))
           .catch(err => next(err));
     })
-    .post(authenticate.verifyUser, (req, res) => {
+    .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
       res.status(403).end(`POST operation not supported on /dishes/${req.params.dishId}`);
     })
-    .put(authenticate.verifyUser, (req, res, next) => {
+    .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       getDishById(req.params.dishId)
           .then(dish => {
             dish.set(req.body);
@@ -71,7 +70,7 @@ dishRouter.route('/:dishId')
           .then(dish => res.json(dish))
           .catch(err => next(err));
     })
-    .delete(authenticate.verifyUser, (req, res, next) => {
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       getDishById(req.params.dishId)
           .then(dish => dish.remove())
           .then(dish => res.json(dish))
@@ -98,7 +97,7 @@ dishRouter.route('/:dishId/comments')
     .put(authenticate.verifyUser, (req, res) => {
       res.status(403).end(`PUT operation not supported on /dishes/${req.params.dishId}/comments`);
     })
-    .delete(authenticate.verifyUser, (req, res, next) => {
+    .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
       getDishById(req.params.dishId)
           .then(dish => {
             dish.comments = [];
@@ -120,9 +119,13 @@ dishRouter.route('/:dishId/comments/:commentId')
     .put(authenticate.verifyUser, (req, res, next) => {
       getDishAndCommentById(req.params.dishId, req.params.commentId)
           .then(({ dish, comment }) => {
-            if (req.body.rating) { comment.rating = req.body.rating; }
-            if (req.body.comment) { comment.comment = req.body.comment; }
-            return dish.save();
+            if (req.user._id.equals(comment.author)) {
+              if (req.body.rating) { comment.rating = req.body.rating; }
+              if (req.body.comment) { comment.comment = req.body.comment; }
+              return dish.save();
+            } else {
+              return Promise.reject(createError(403, 'You are not authorized to perform this operation!'));
+            }
           })
           .then(dish => Dishes.findById(dish._id).populate('comments.author'))
           .then(dish => res.json(dish))
@@ -131,8 +134,12 @@ dishRouter.route('/:dishId/comments/:commentId')
     .delete(authenticate.verifyUser, (req, res, next) => {
       getDishAndCommentById(req.params.dishId, req.params.commentId)
           .then(({ dish, comment }) => {
-            comment.remove();
-            return dish.save();
+            if (req.user._id.equals(comment.author)) {
+              comment.remove();
+              return dish.save();
+            } else {
+              return Promise.reject(createError(403, 'You are not authorized to perform this operation!'));
+            }
           })
           .then(dish => Dishes.findById(dish._id).populate('comments.author'))
           .then(dish => res.json(dish))
