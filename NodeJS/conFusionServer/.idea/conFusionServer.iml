@@ -16,6 +16,7 @@
     <orderEntry type="library" name="@types/jsonwebtoken" level="application" />
     <orderEntry type="library" name="@types/multer" level="application" />
     <orderEntry type="library" name="@types/cors" level="application" />
+    <orderEntry type="library" name="@types/passport-facebook-token" level="application" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />

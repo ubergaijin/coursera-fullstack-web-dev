@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@types/cors, @types/express, @types/jsonwebtoken, @types/mongodb, @types/mongoose, @types/morgan, @types/multer, @types/node, @types/passport, @types/passport-jwt, @types/passport-local, @types/passport-local-mongoose}" />
+    <file url="PROJECT" libraries="{@types/cors, @types/express, @types/jsonwebtoken, @types/mongodb, @types/mongoose, @types/morgan, @types/multer, @types/node, @types/passport, @types/passport-facebook-token, @types/passport-jwt, @types/passport-local, @types/passport-local-mongoose}" />
     <includedPredefinedLibrary name="HTTP Response Handler" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
