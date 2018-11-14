@@ -24,7 +24,7 @@ promoRouter.route('/')
       res.sendStatus(200);
     })
     .get(cors.cors, (req, res, next) => {
-      Promotions.find({}).then(promos => res.json(promos), err => next(err));
+      Promotions.find(req.query).then(promos => res.json(promos), err => next(err));
     })
     .post(cors.corsWithOptions, auth.verifyUser, auth.verifyAdmin, (req, res, next) => {
       Promotions.create(req.body).then(promos => res.json(promos), err => next(err));

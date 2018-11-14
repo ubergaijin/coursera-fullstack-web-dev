@@ -1,7 +1,6 @@
-const express = require('express');
 const cors = require('cors');
 
-const whitelist = ['http://localhost:3000', 'https://localhost:3443'];
+const whitelist = ['http://localhost:3000', 'https://localhost:3443', 'http://Cyrils-MacBook-Pro.local:3001'];
 
 const checkOrigin = (origin, callback) => {
   console.log('Origin: ', origin);

@@ -24,7 +24,7 @@ leaderRouter.route('/')
       res.sendStatus(200);
     })
     .get(cors.cors, (req, res, next) => {
-      Leaders.find({}).then(leaders => res.json(leaders), err => next(err));
+      Leaders.find(req.query).then(leaders => res.json(leaders), err => next(err));
     })
     .post(cors.corsWithOptions, auth.verifyUser, auth.verifyAdmin, (req, res, next) => {
       Leaders.create(req.body).then(leaders => res.json(leaders), err => next(err));

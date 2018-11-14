@@ -8,6 +8,10 @@ const cors = require('./cors');
 
 const router = express.Router();
 
+router.options('*', cors.corsWithOptions, (req, res) => {
+  res.sendStatus(200);
+});
+
 router.get('/', cors.corsWithOptions, auth.verifyUser, auth.verifyAdmin, (req, res, next) => {
   User.find({}).then(users => res.json(users), err => next(err));
 });
@@ -37,9 +41,23 @@ router.post('/signup', cors.corsWithOptions, (req, res) => {
       });
 });
 
-router.post('/login', cors.corsWithOptions, passport.authenticate('local'), (req, res) => {
-  const token = auth.getToken({ _id: req.user._id });
-  res.json({ success: true, token: token, status: 'You are successfully logged in!' });
+router.post('/login', cors.corsWithOptions, (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      next(err);
+    } else if (!user) {
+      res.status(401).json({ success: false, status: 'Login Unsuccessful!', err: info });
+    } else {
+      req.logIn(user, (err) => {
+        if (err) {
+          res.status(401).json({ success: false, status: 'Could not log in user!', err: info });
+        } else {
+          const token = auth.getToken({ _id: req.user._id });
+          res.json({ success: true, status: 'Login Successful!', token: token });
+        }
+      });
+    }
+  })(res, req, next);
 });
 
 router.get('/logout', cors.corsWithOptions, (req, res, next) => {
@@ -57,6 +75,18 @@ router.get('/facebook/token', passport.authenticate('facebook-token'), (req, res
     const token = auth.getToken({ _id: req.user._id });
     res.json({ success: true, token: token, status: 'You are successfully logged in!' });
   }
+});
+
+router.get('/checkJWTToken', cors.corsWithOptions, (req, res, next) => {
+  passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    if (err) {
+      next(err);
+    } else if (!user) {
+      res.status(401).json({ success: false, status: 'JWT invalid!', err: info });
+    } else {
+      res.json({ success: true, status: 'JWT valid!', user: user });
+    }
+  })(req, res, next);
 });
 
 module.exports = router;
