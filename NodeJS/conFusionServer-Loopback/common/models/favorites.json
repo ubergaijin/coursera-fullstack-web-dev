@@ -1,5 +1,5 @@
 {
-  "name": "leaders",
+  "name": "favorites",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -8,35 +8,20 @@
   "mixins": {
     "TimeStamp": true
   },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "dishes": {
+      "type": "belongsTo",
+      "model": "dishes",
+      "foreignKey": ""
     },
-    "image": {
-      "type": "string",
-      "required": true
-    },
-    "designation": {
-      "type": "string",
-      "required": true
-    },
-    "abbr": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "string",
-      "required": true
-    },
-    "featured": {
-      "type": "boolean",
-      "required": true,
-      "default": false
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerId"
     }
   },
-  "validations": [],
-  "relations": {},
   "acls": [
     {
       "accessType": "*",
@@ -47,20 +32,20 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$owner",
       "permission": "ALLOW"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "create"
     },
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$owner",
       "permission": "ALLOW"
     }
   ],
