@@ -14,14 +14,14 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "MongoDB"
   },
   "AccessToken": {
     "dataSource": "db",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "RoleMapping": {
@@ -32,19 +32,23 @@
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": false
   },
   "dishes": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "promotions": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
     "public": true
   },
   "leaders": {
-    "dataSource": "db",
+    "dataSource": "MongoDB",
+    "public": true
+  },
+  "Customer": {
+    "dataSource": "MongoDB",
     "public": true
   }
 }
